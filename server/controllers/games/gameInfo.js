@@ -24,6 +24,7 @@
   *
  */
 const logger = require('../../../tools/logger');
+const io = require('../../utils/io').instance;
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
 
