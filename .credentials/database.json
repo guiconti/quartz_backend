@@ -1,0 +1,16 @@
+{
+  "development": {
+    "DB_USERNAME": "quartz_admin",
+    "DB_PASSWORD": "1011121314!)!!!@!#!$",
+    "DB_HOST": "178.128.148.58",
+    "DB_PORT": "27017",
+    "DB_NAME": "quartz_dev"
+  },
+  "production": {
+    "DB_USERNAME": "quartz_admin",
+    "DB_PASSWORD": "1011121314!)!!!@!#!$",
+    "DB_HOST": "178.128.148.58",
+    "DB_PORT": "27017",
+    "DB_NAME": "quartz_dev"
+  }
+}
