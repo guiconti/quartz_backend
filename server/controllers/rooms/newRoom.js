@@ -22,7 +22,7 @@
   *
  */
 const logger = require('../../../tools/logger');
-const db = require('../../models/database');
+const database = require('../../models/database');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
 
@@ -43,7 +43,7 @@ module.exports = (req, res) => {
     });
   }
  
-  const newRoom = new db.Rooms({ name });
+  const newRoom = new database.Rooms({ name });
 
   newRoom.save((err, room) => {
     if (err || !room) {

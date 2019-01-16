@@ -22,20 +22,20 @@ mongoose.connect(
   }
 );
 
-const db = mongoose.connection;
+const database = mongoose.connection;
 
 // Connection fails log the error
-db.on('error', function(err) {
+database.on('error', function(err) {
   console.error('MongoDB connection error: ', err);
 });
 
 // Connection ok log the success
-db.once('open', function callback() {
+database.once('open', function callback() {
   console.info('MongoDB connection is established.');
 });
 
 // Connect lost log the event and try to reconnect
-db.on('disconnected', function() {
+database.on('disconnected', function() {
   console.error('MongoDB disconnected.');
   mongoose.connect(
     DB_HOST,
@@ -44,7 +44,7 @@ db.on('disconnected', function() {
 });
 
 // Connect restablished log the event
-db.on('reconnected', function() {
+database.on('reconnected', function() {
   console.info('MongoDB reconnected.');
 });
 
@@ -59,7 +59,7 @@ fs.readdirSync(models_path).forEach(function(file) {
       let schemaName = file.split('.')[0];
       mongoose.Schema[schemaName] = require(models_path + '/' + file)(mongoose);
       mongoose.model(schemaName, mongoose.Schema[schemaName]);
-      db[schemaName] = mongoose.model(schemaName);
+      database[schemaName] = mongoose.model(schemaName);
     } catch (e) {
       remainingModels.push(file);
       return;
@@ -74,11 +74,11 @@ while (remainingModels.length > 0) {
     let schemaName = remainingModels[remainingModelIndex].split('.')[0];
     mongoose.Schema[schemaName] = require(models_path + '/' + remainingModels[remainingModelIndex])(mongoose);
     mongoose.model(schemaName, mongoose.Schema[schemaName]);
-    db[schemaName] = mongoose.model(schemaName);
+    database[schemaName] = mongoose.model(schemaName);
     remainingModels.splice(remainingModelIndex, 1);
   } catch (e) {
     remainingModelIndex = remainingModelIndex == remainingModels.length - 1 ? 0 : remainingModelIndex + 1;
   }
 }
 
-module.exports = db;
+module.exports = database;
