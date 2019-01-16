@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const constants = require('../utils/constants');
 
-const GameSchema = new Schema({
+const CrystalSchema = new Schema({
   name: { 
     type: String, 
     required: true,
@@ -30,7 +30,12 @@ const GameSchema = new Schema({
         constants.values.crystals.AUTUNITA.value
     ],
     default: constants.values.crystals.QUARTZO.value
+  },
+  amount: {
+    type: Number,
+    required: true,
+    default: 0
   }
 });
 
-mongoose.model('Games', GameSchema);
+mongoose.model('Crystals', CrystalSchema);

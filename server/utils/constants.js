@@ -23,13 +23,40 @@ module.exports = {
     TOKEN_ENCRYPT_KEY: process.env.TOKEN_ENCRYPT_KEY,
     TOKEN_EXPIRATION_IN_SECONDS: 60 * 60 * 24 * 30,
     crystals: {
-      QUARTZO: 'Quartzo',
-      RUBELITA: 'Rubelita',
-      ESMERALDA: 'Esmeralda',
-      SAFIRA: 'Safira',
-      RUBI: 'Rubi',
-      AMBAR: 'Âmbar',
-      AUTUNITA: 'Autunita'
+      QUARTZO: {
+        name: 'Quartzo',
+        value: 1
+      },
+      RUBELITA: {
+        name: 'Rubelita',
+        value: 2
+      },
+      ESMERALDA: {
+        name: 'Esmeralda',
+        value: 3
+      },
+      SAFIRA: {
+        name: 'Safira',
+        value: 4
+      },
+      RUBI: {
+        name: 'Rubi',
+        value: 6
+      },
+      AMBAR: {
+        name: 'Âmbar',
+        value: 8
+      },
+      AUTUNITA: {
+        name: 'Autunita',
+        value: 0
+      }
+    },
+    cards: {
+      types: {
+        OFFENSIVE: 'OFFENSIVE',
+        DEFENSIVE: 'DEFENSIVE'
+      }
     }
   },
   roles: {
