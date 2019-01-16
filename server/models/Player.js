@@ -15,7 +15,12 @@ const PlayerSchema = new Schema({
     default: 0
   },
   crystals: [ Crystal ],
-  cards: [ Card ]
+  cards: [ Card ],
+  hasAnIdiotBook: {
+    type: Boolean,
+    required: false,
+    default: false
+  }
 });
 
 mongoose.model('Player', PlayerSchema);
