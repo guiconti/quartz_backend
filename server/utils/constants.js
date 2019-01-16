@@ -21,7 +21,16 @@ module.exports = {
     PASSWORD_ENCRYPT_KEY: process.env.PASSWORD_ENCRYPT_KEY,
     USER_DATA_ENCRYPT_KEY: process.env.USER_DATA_ENCRYPT_KEY,
     TOKEN_ENCRYPT_KEY: process.env.TOKEN_ENCRYPT_KEY,
-    TOKEN_EXPIRATION_IN_SECONDS: 60 * 60 * 24 * 30
+    TOKEN_EXPIRATION_IN_SECONDS: 60 * 60 * 24 * 30,
+    crystals: {
+      QUARTZO: 'Quartzo',
+      RUBELITA: 'Rubelita',
+      ESMERALDA: 'Esmeralda',
+      SAFIRA: 'Safira',
+      RUBI: 'Rubi',
+      AMBAR: 'Âmbar',
+      AUTUNITA: 'Autunita'
+    }
   },
   roles: {
     OWNER: 'owner',
