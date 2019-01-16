@@ -9,6 +9,7 @@ module.exports = {
     },
     error: {
       INVALID_NAME: 'Name sent is not valid.',
+      INVALID_PASSWORD: 'Password sent is not valid.',
       UNEXPECTED_RUNNING: 'An error ocurred while processing your request. Please try again.',
       UNEXPECTED_DB: 'An error ocurred while accessing our database. Please try again.'
     }

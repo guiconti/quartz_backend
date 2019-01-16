@@ -50,9 +50,35 @@ db.on('reconnected', function() {
 
 // Load our DB models
 let models_path = process.cwd() + '/server/models';
+let remainingModels = [];
 
+//  Fill schemas
 fs.readdirSync(models_path).forEach(function(file) {
   if (file.indexOf('.js') && file !== 'database.js') {
-    require(models_path + '/' + file);
+    try {
+      let schemaName = file.split('.')[0];
+      mongoose.Schema[schemaName] = require(models_path + '/' + file)(mongoose);
+      mongoose.model(schemaName, mongoose.Schema[schemaName]);
+      db[schemaName] = mongoose.model(schemaName);
+    } catch (e) {
+      remainingModels.push(file);
+      return;
+    }
   }
 });
+
+let remainingModelIndex = 0;
+
+while (remainingModels.length > 0) {
+  try {
+    let schemaName = remainingModels[remainingModelIndex].split('.')[0];
+    mongoose.Schema[schemaName] = require(models_path + '/' + remainingModels[remainingModelIndex])(mongoose);
+    mongoose.model(schemaName, mongoose.Schema[schemaName]);
+    db[schemaName] = mongoose.model(schemaName);
+    remainingModels.splice(remainingModelIndex, 1);
+  } catch (e) {
+    remainingModelIndex = remainingModelIndex == remainingModels.length - 1 ? 0 : remainingModelIndex + 1;
+  }
+}
+
+module.exports = db;
