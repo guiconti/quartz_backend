@@ -16,7 +16,10 @@ const DB_HOST =
 // Connect to the database
 mongoose.connect(
   DB_HOST,
-  { auto_reconnect: true }
+  { 
+    auto_reconnect: true,
+    useNewUrlParser: true
+  }
 );
 
 const db = mongoose.connection;
