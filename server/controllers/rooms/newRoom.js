@@ -22,8 +22,6 @@
   *
  */
 const logger = require('../../../tools/logger');
-// const mongoose = require('mongoose');
-// const RoomsModel = mongoose.model('Rooms');
 const db = require('../../models/database');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
@@ -45,7 +43,7 @@ module.exports = (req, res) => {
     });
   }
  
-  const newRoom = new db.Room({ name });
+  const newRoom = new db.Rooms({ name });
 
   newRoom.save((err, room) => {
     if (err || !room) {
