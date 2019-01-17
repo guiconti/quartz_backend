@@ -9,7 +9,9 @@ module.exports = {
     },
     error: {
       INVALID_NAME: 'Name sent is not valid.',
+      INVALID_USERNAME: 'Username sent is not valid.',
       INVALID_PASSWORD: 'Password sent is not valid.',
+      USERNAME_NOT_UNIQUE: 'This username is already being used',
       UNEXPECTED_RUNNING: 'An error ocurred while processing your request. Please try again.',
       UNEXPECTED_DB: 'An error ocurred while accessing our database. Please try again.'
     }
@@ -25,6 +27,7 @@ module.exports = {
     USER_DATA_ENCRYPT_KEY: process.env.USER_DATA_ENCRYPT_KEY,
     TOKEN_ENCRYPT_KEY: process.env.TOKEN_ENCRYPT_KEY,
     TOKEN_EXPIRATION_IN_SECONDS: 60 * 60 * 24 * 30,
+    TOKEN_NAME: 'session',
     crystals: {
       QUARTZO: {
         name: 'Quartzo',
@@ -60,6 +63,9 @@ module.exports = {
         OFFENSIVE: 'OFFENSIVE',
         DEFENSIVE: 'DEFENSIVE'
       }
+    },
+    errorCodes: {
+      DUPLICATE_UNIQUE: 11000
     }
   },
   roles: {

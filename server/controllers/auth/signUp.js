@@ -1,60 +1,91 @@
 /**
- * @api {POST} /rooms/ Create new room
- * @apiName Create room
- * @apiGroup Rooms
+ * @api {POST} /auth/sign_up User sign up
+ * @apiName Sign Up
+ * @apiGroup Auth
  * @apiVersion 1.0.0
  *
- * @apiSuccess (200) {json} msg Room info.
- * @apiSuccess (200) {String} id Room id.
- * @apiSuccess (200) {String} name Room name.
- * @apiSuccess (200) {Array} players Room players.
+ * @apiParam {String} username Users username.
+ * @apiParam {String} password Users password.
+ *
+ * @apiSuccess (201) {String} id User id.
+ * @apiSuccess (201) {String} username User name.
  * @apiSuccessExample {json} Success-Response:
-    "msg": [
-        {
-          "id": "012a362a-4f32-496f-bf25-d785d4df42ed",
-          "name": "Room example",
-          "players": [{"id": "391231903-asd901231", "name": "Test"}
-        }
-    ]
- * @apiError (500) {String} msg Error message.
+    {
+      "id": "012a362a-4f32-496f-bf25-d785d4df42ed",
+      "username": "example"
+    }
+ * @apiError (400) {String} msg Error message.
  * @apiErrorExample {json} Error-Response:
-    { "msg": "Database connection error." }
+    { "msg": "Username not valid." }
   *
  */
+const database = require('../../models/database');
+const encryptor = require('../../utils/encryptor');
+const generateToken = require('../../utils/generateToken');
 const logger = require('../../../tools/logger');
-// const mongoose = require('mongoose');
-// const RoomsModel = mongoose.model('Rooms');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
 
 /**
- * Create a room
+ * Create a new user
  *
- * @param {string} req.params.name - Room name
- * @return {object} - Returns the room in a json format
+ * @param {object} req.body - New user info
+ * @return {string} - Returns a confirmation message
  * @throws {object} - Returns a msg that indicates a failure
  *
  */
 module.exports = (req, res) => {
-  let { name } = req.body;
-
-  if (!validator.isValidString(name)) {
+  let { username, password } = req.body;
+  let { file } = req;
+  if (!validator.isValidString(username)) {
     return res.status(400).json({
-      msg: constants.messages.error.INVALID_NAME
+      msg: constants.messages.error.INVALID_USERNAME
     });
   }
- 
-  const newRoom = new RoomsModel({ name });
+  if (!validator.isValidString(password)) {
+    return res.status(400).json({
+      msg: constants.messages.error.INVALID_PASSWORD
+    });
+  }
 
-  newRoom.save((err, room) => {
-    if (err || !room) {
+  username = username.trim();
+  password = encryptor(password, constants.values.PASSWORD_ENCRYPT_KEY);
+
+  if (!password) {
+    return res.status(500).json({
+      msg: constants.messages.error.UNEXPECTED_RUNNING
+    });
+  }
+
+  const newUser = new database.Users({ username, password });
+  newUser.save((err, user) => {
+    if (err) {
+      if (err.code === constants.values.errorCodes.DUPLICATE_UNIQUE) {
+        return res.status(400).json({
+          msg: constants.messages.error.USERNAME_NOT_UNIQUE
+        });
+      }
       logger.error(err);
       return res.status(500).json({
         msg: constants.messages.error.UNEXPECTED_DB
       });
     }
-    return res.status(200).json({
-      msg: room
+    const userData = {
+      id: user.id,
+      username: user.username
+    };
+    const tokenData = encryptor(userData, constants.values.USER_DATA_ENCRYPT_KEY);
+    res.cookie(
+      constants.values.TOKEN_NAME,
+      generateToken(
+        tokenData,
+        constants.values.TOKEN_ENCRYPT_KEY,
+        constants.values.TOKEN_EXPIRATION_IN_SECONDS
+      )
+    );
+
+    return res.status(201).json({
+      msg: userData
     });
   });
 };
