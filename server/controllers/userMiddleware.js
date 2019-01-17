@@ -18,7 +18,6 @@ const database = require('../models/database');
  * @throws {json} - Throws a message with the error info
  */
 module.exports = (req, res, next) => {
-  console.log(req.cookies);
   if (!req.cookies || !validator.isValidString(req.cookies.session)) {
     return res.status(401).json({
       msg: constants.messages.error.INVALID_LOGIN

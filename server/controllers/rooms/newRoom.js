@@ -36,6 +36,7 @@ const constants = require('../../utils/constants');
  */
 module.exports = (req, res) => {
   let { name } = req.body;
+  const owner = req.user.id;
 
   if (!validator.isValidString(name)) {
     return res.status(400).json({
@@ -43,7 +44,7 @@ module.exports = (req, res) => {
     });
   }
  
-  const newRoom = new database.Rooms({ name });
+  const newRoom = new database.Rooms({ name, owner });
 
   newRoom.save((err, room) => {
     if (err || !room) {

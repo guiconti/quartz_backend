@@ -5,6 +5,20 @@ module.exports = mongoose => {
       required: true, 
       default: '' 
     },
-    users: [ mongoose.Schema.Users ]
+    owner: {
+      type: String,
+      required: true
+    },
+    game: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    users: [ mongoose.Schema.Users ],
+    active: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
   });
 };
