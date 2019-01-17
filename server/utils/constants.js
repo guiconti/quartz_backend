@@ -11,6 +11,7 @@ module.exports = {
       INVALID_NAME: 'Name sent is not valid.',
       INVALID_USERNAME: 'Username sent is not valid.',
       INVALID_PASSWORD: 'Password sent is not valid.',
+      INVALID_USER: 'This user/password does not correspond to a valid user.',
       USERNAME_NOT_UNIQUE: 'This username is already being used',
       UNEXPECTED_RUNNING: 'An error ocurred while processing your request. Please try again.',
       UNEXPECTED_DB: 'An error ocurred while accessing our database. Please try again.'
