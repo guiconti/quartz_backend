@@ -37,14 +37,19 @@ const constants = require('../../utils/constants');
 module.exports = (req, res) => {
   let { name } = req.body;
   const owner = req.user.id;
+  const users = [
+    req.user.id
+  ];
 
   if (!validator.isValidString(name)) {
     return res.status(400).json({
       msg: constants.messages.error.INVALID_NAME
     });
   }
+
+  name = name.trim();
  
-  const newRoom = new database.Rooms({ name, owner });
+  const newRoom = new database.Rooms({ name, owner, users });
 
   newRoom.save((err, room) => {
     if (err || !room) {
@@ -53,6 +58,7 @@ module.exports = (req, res) => {
         msg: constants.messages.error.UNEXPECTED_DB
       });
     }
+
     return res.status(200).json({
       msg: room
     });

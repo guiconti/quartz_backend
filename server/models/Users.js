@@ -6,8 +6,7 @@ module.exports = mongoose => {
       required: true
     },
     password: {
-      type: String,
-      required: true
+      type: String
     },
   });
 };

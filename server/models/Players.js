@@ -11,7 +11,7 @@ module.exports = mongoose => {
       default: 0
     },
     crystals: [ mongoose.Schema.Crystals ],
-    cards: [ mongoose.Schema.Cards ],
+    cards: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Cards' } ],
     hasAnIdiotBook: {
       type: Boolean,
       required: false,

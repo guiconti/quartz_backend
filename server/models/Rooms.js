@@ -5,16 +5,16 @@ module.exports = mongoose => {
       required: true, 
       default: '' 
     },
-    owner: {
-      type: String,
-      required: true
+    owner: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Users'
     },
     game: {
       type: String,
       required: false,
       default: ''
     },
-    users: [ mongoose.Schema.Users ],
+    users: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Users' } ],
     active: {
       type: Boolean,
       required: false,

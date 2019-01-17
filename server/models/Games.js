@@ -1,10 +1,13 @@
 module.exports = mongoose => {
   return new mongoose.Schema({
     name: { type: String, required: true, default: '' },
-    players: [ mongoose.Schema.Players ],
-    cave: mongoose.Schema.Caves,
-    cardsBoard: [ mongoose.Schema.Cards ],
-    cardsPile: [ mongoose.Schema.Cards ],
-    cardsDiscarded: [ mongoose.Schema.Cards ]
+    players: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Players' } ],
+    cave: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Caves' 
+    },
+    cardsBoard: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Cards' }],
+    cardsPile: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Cards' } ],
+    cardsDiscarded: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Cards' } ]
   });
 };
