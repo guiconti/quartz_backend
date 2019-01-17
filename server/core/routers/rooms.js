@@ -8,6 +8,7 @@ const controllers = retrieveControllers(path.basename(__filename).split('.')[0])
 
 //  Auth API
 router.post('/', userMiddleware, controllers.newRoom);
+router.patch('/:roomId', userMiddleware, controllers.joinRoom);
 router.get('/', controllers.retrieveRooms);
 
 module.exports = router;

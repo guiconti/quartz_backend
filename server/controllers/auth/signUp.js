@@ -22,7 +22,6 @@
 const database = require('../../models/database');
 const encryptor = require('../../utils/encryptor');
 const generateToken = require('../../utils/generateToken');
-const logger = require('../../../tools/logger');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
 
@@ -65,7 +64,6 @@ module.exports = (req, res) => {
           msg: constants.messages.error.USERNAME_NOT_UNIQUE
         });
       }
-      logger.error(err);
       return res.status(500).json({
         msg: constants.messages.error.UNEXPECTED_DB
       });

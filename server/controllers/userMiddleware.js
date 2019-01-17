@@ -7,7 +7,6 @@
 const tokenDecryptor = require('../utils/tokenDecryptor');
 const validator = require('../utils/validator');
 const constants = require('../utils/constants');
-const logger = require('../../tools/logger');
 const database = require('../models/database');
 
 /**

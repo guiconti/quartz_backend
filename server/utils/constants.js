@@ -13,6 +13,9 @@ module.exports = {
       INVALID_PASSWORD: 'Password sent is not valid.',
       INVALID_USER: 'This user/password does not correspond to a valid user.',
       INVALID_LOGIN: 'You need to be signed in to use this feature.',
+      INVALID_ROOM: 'Room id sent is not valid.',
+      ROOM_NOT_FOUND: 'This room id does not correspond to a valid room.',
+      INACTIVE_ROOM: 'This room is not accepting new users anymore.',
       USERNAME_NOT_UNIQUE: 'This username is already being used',
       UNEXPECTED_RUNNING: 'An error ocurred while processing your request. Please try again.',
       UNEXPECTED_DB: 'An error ocurred while accessing our database. Please try again.'
@@ -30,6 +33,7 @@ module.exports = {
     TOKEN_ENCRYPT_KEY: process.env.TOKEN_ENCRYPT_KEY,
     TOKEN_EXPIRATION_IN_SECONDS: 60 * 60 * 24 * 30,
     TOKEN_NAME: 'session',
+    MAX_ROOM_USERS: 4,
     crystals: {
       QUARTZO: {
         name: 'Quartzo',
