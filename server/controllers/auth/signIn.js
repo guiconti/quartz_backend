@@ -46,7 +46,8 @@ module.exports = (req, res) => {
   username = username.trim();
 
   database.Users
-    .findOne({ username }, (err, user) => {
+    .findOne({ username })
+    .exec((err, user) => {
       if (err) {
         return res.status(500).json({
           msg: constants.messages.error.UNEXPECTED_DB
