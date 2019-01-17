@@ -18,7 +18,8 @@ mongoose.connect(
   DB_HOST,
   { 
     auto_reconnect: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useCreateIndex: true
   }
 );
 
