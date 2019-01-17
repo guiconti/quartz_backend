@@ -5,7 +5,7 @@
 module.exports = {
   messages: {
     info: {
-      
+      USER_LOGGED_OUT: 'User logged out.'
     },
     error: {
       INVALID_NAME: 'Name sent is not valid.',
