@@ -1,31 +1,29 @@
 /**
- * @api {GET} /rooms/ List rooms
- * @apiName List rooms
+ * @api {GET} /rooms/:roomId Retrieve room info
+ * @apiName Retrieve room info
  * @apiGroup Rooms
  * @apiVersion 1.0.0
  *
  * @apiParam {Boolean} active Filter by active rooms.
  * 
- * @apiSuccess (200) {json[]} msg Room info.
+ * @apiSuccess (200) {json} msg Room info.
  * @apiSuccess (200) {String} _id Room id.
  * @apiSuccess (200) {String} owner Rooms owner id.
  * @apiSuccess (200) {String} game Rooms game id.
  * @apiSuccess (200) {Array} users Room users.
  * @apiSuccess (200) {Boolean} active Room active state.
  * @apiSuccessExample {json} Success-Response:
-    "msg": [
-        {
-          "_id": "012a362a-4f32-496f-bf25-d785d4df42ed",
-          "name": "Room example",
-          "owner": "012a332a-4f32-496f-bf25-d785d4df42ed",
-          "game": "012a362a-4f31-496f-bf25-d785d4df42ed",
-          "users": [{
-            "_id": "391231903-asd901231",
-            "username": "example",
-          }],
-          "active": true
-        }
-    ]
+    "msg": {
+      "_id": "012a362a-4f32-496f-bf25-d785d4df42ed",
+      "name": "Room example",
+      "owner": "012a332a-4f32-496f-bf25-d785d4df42ed",
+      "game": "012a362a-4f31-496f-bf25-d785d4df42ed",
+      "users": [{
+        "_id": "391231903-asd901231",
+        "username": "example",
+      }],
+      "active": true
+    }
  * @apiError (500) {String} msg Error message.
  * @apiErrorExample {json} Error-Response:
     { "msg": "Database connection error." }
@@ -44,25 +42,26 @@ const constants = require('../../utils/constants');
  *
  */
 module.exports = (req, res) => {
-  let filters = {};
-  let { active } = req.query;
+  let { roomId } = req.params;
 
-  if (validator.isValidString(active)) {
-    filters = { active, ...filters };
+  if (!validator.isValidString(roomId)) {
+    return res.status(400).json({
+      msg: constants.messages.error.INVALID_ROOM
+    });
   }
 
   database.Rooms
-    .find(filters)
+    .findById(roomId)
     .populate('owner', 'username')
     .populate('users', 'username')
-    .exec((err, rooms) => {
+    .exec((err, room) => {
     if (err) {
       return res.status(500).json({
         msg: constants.messages.error.UNEXPECTED_DB
       });
     }
     return res.status(200).json({
-      msg: rooms
+      msg: room
     });
   });
 };

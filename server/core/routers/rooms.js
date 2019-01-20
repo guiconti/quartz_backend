@@ -10,5 +10,7 @@ const controllers = retrieveControllers(path.basename(__filename).split('.')[0])
 router.post('/', userMiddleware, controllers.newRoom);
 router.patch('/:roomId', userMiddleware, controllers.joinRoom);
 router.get('/', controllers.retrieveRooms);
+router.get('/:roomId', controllers.retrieveRoom);
+
 
 module.exports = router;
