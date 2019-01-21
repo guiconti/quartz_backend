@@ -34,6 +34,7 @@ module.exports = {
     types: {
       CONNECT: 'connection',
       JOIN_ROOM: 'joinRoom',
+      NEW_USER: 'newUser',
       NEW_MESSAGE: 'newMessage'
     }
   },
