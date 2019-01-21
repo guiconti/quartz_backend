@@ -15,5 +15,8 @@ exports.initialize = server => {
     socket.on(constants.sockets.types.JOIN_ROOM, roomId => {
       socket.join(roomId);
     });
+    socket.on(constants.sockets.types.LEAVE_ROOM, roomId => {
+      socket.leave(roomId);
+    });
   });
 };
