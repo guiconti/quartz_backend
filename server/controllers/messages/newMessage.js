@@ -64,7 +64,7 @@ module.exports = (req, res) => {
       });
     }
 
-    io.emit(parent, constants.sockets.types.USER_MESSAGE, content);
+    io.emit(parent, constants.sockets.types.NEW_MESSAGE, message);
     return res.status(200).json({
       msg: constants.messages.info.MESSAGE_SENT
     });

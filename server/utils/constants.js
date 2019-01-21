@@ -32,7 +32,9 @@ module.exports = {
   },
   sockets: {
     types: {
-      USER_MESSAGE: 'user_message'
+      CONNECT: 'connection',
+      JOIN_ROOM: 'joinRoom',
+      NEW_MESSAGE: 'newMessage'
     }
   },
   values: {
