@@ -32,7 +32,7 @@ module.exports = (req, res, next) => {
   }
 
   return database.Users
-    .findById(userData.id, 'id username', (err, user) => {
+    .findById(userData._id, '_id username', (err, user) => {
       if (err) {
         return res.status(500).json({
           msg: constants.messages.error.UNEXPECTED_DB

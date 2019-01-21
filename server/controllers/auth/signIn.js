@@ -71,7 +71,7 @@ module.exports = (req, res) => {
       }
 
       const userData = {
-        id: user.id,
+        _id: user._id,
         username: user.username
       };
       const tokenData = encryptor(userData, constants.values.USER_DATA_ENCRYPT_KEY);
