@@ -14,6 +14,8 @@ module.exports = {
       INVALID_USER: 'This user/password does not correspond to a valid user.',
       INVALID_LOGIN: 'You need to be signed in to use this feature.',
       INVALID_ROOM: 'Room id sent is not valid.',
+      INVALID_PARENT: 'Parent id sent is not valid.',
+      INVALID_CONTENT: 'Message\'s content is not valid.',
       ROOM_NOT_FOUND: 'This room id does not correspond to a valid room.',
       INACTIVE_ROOM: 'This room is not accepting new users anymore.',
       USERNAME_NOT_UNIQUE: 'This username is already being used',

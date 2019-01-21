@@ -34,7 +34,7 @@ const constants = require('../../utils/constants');
 /**
  * Create a room
  *
- * @param {string} req.params.name - Room name
+ * @param {string} req.body.name - Room name
  * @return {object} - Returns the room in a json format
  * @throws {object} - Returns a msg that indicates a failure
  *
