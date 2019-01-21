@@ -58,15 +58,20 @@ module.exports = (req, res) => {
 
   newMessage.save((err, message) => {
     if (err || !message) {
-      logger.error(err);
       return res.status(500).json({
         msg: constants.messages.error.UNEXPECTED_DB
       });
     }
-
-    io.emit(parent, constants.sockets.types.NEW_MESSAGE, message);
-    return res.status(200).json({
-      msg: constants.messages.info.MESSAGE_SENT
+    database.Messages.populate(message, 'owner', (err, message) => {
+      if (err || !message) {
+        return res.status(500).json({
+          msg: constants.messages.error.UNEXPECTED_DB
+        });
+      }
+      io.emit(parent, constants.sockets.types.NEW_MESSAGE, message);
+      return res.status(200).json({
+        msg: constants.messages.info.MESSAGE_SENT
+      });
     });
   });
 };
