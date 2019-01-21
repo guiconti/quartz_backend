@@ -1,11 +1,13 @@
 const socketIO = require('socket.io');
 let io = null;
 
-exports.instance = function () {
-  return io;
+exports.emit = (namespace, type, content) => {
+  io
+    .of(`/${namespace}`)
+    .emit(type, content);
 };
 
-exports.initialize = function(server) {
+exports.initialize = server => {
   io = socketIO(server);
 
   io.on('connection', socket => {

@@ -26,6 +26,7 @@
 const database = require('../../models/database');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
+const io = require('../../utils/io');
 
 /**
  * Create a message
@@ -63,8 +64,9 @@ module.exports = (req, res) => {
       });
     }
 
+    io.emit(parent, constants.sockets.types.USER_MESSAGE, content);
     return res.status(200).json({
-      msg: message
+      msg: constants.messages.info.MESSAGE_SENT
     });
   });
 };
