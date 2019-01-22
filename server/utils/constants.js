@@ -18,6 +18,7 @@ module.exports = {
       INVALID_PARENT: 'Parent id sent is not valid.',
       INVALID_CONTENT: 'Message\'s content is not valid.',
       INVALID_PLAYERS: 'Players sent are not valid.',
+      INVALID_GAME: 'Game id sent is not valid.',
       NOT_OWNER: 'You do not own this room.',
       ROOM_NOT_ENABLE: 'This room is not enable to start the game.',
       ROOM_NOT_FOUND: 'This room id does not correspond to a valid room.',
