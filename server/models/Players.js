@@ -17,6 +17,11 @@ module.exports = mongoose => {
       type: Boolean,
       required: false,
       default: false
+    },
+    isRoundActive: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   });
 };
