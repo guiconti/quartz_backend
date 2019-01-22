@@ -31,6 +31,9 @@
   *
  */
 const database = require('../../models/database');
+const generatePlayer = require('../../utils/generatePlayer');
+const generateCave = require('../../utils/generateCave');
+const generateCardPile = require('../../utils/generateCardPile');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
 const io = require('../../utils/io');
@@ -71,124 +74,44 @@ module.exports = (req, res) => {
           msg: constants.messages.error.ROOM_NOT_ENABLE
         });
       }
-      const initialCrystals = [
-        {
-          name: constants.values.crystals.QUARTZO.name,
-          value: constants.values.crystals.QUARTZO.value
-        },
-        {
-          name: constants.values.crystals.RUBELITA.name,
-          value: constants.values.crystals.RUBELITA.value
-        },
-        {
-          name: constants.values.crystals.ESMERALDA.name,
-          value: constants.values.crystals.ESMERALDA.value
-        },
-        {
-          name: constants.values.crystals.SAFIRA.name,
-          value: constants.values.crystals.SAFIRA.value
-        },
-        {
-          name: constants.values.crystals.RUBI.name,
-          value: constants.values.crystals.RUBI.value
-        },
-        {
-          name: constants.values.crystals.AMBAR.name,
-          value: constants.values.crystals.AMBAR.value
-        },
-        {
-          name: constants.values.crystals.AUTUNITA.name,
-          value: constants.values.crystals.AUTUNITA.value
-        }
-      ];
-      let caveData = {
-        crystals: [
-          {
-            name: constants.values.crystals.QUARTZO.name,
-            value: constants.values.crystals.QUARTZO.value,
-            amount: constants.values.crystals.QUARTZO.amount
-          },
-          {
-            name: constants.values.crystals.RUBELITA.name,
-            value: constants.values.crystals.RUBELITA.value,
-            amount: constants.values.crystals.RUBELITA.amount
-          },
-          {
-            name: constants.values.crystals.ESMERALDA.name,
-            value: constants.values.crystals.ESMERALDA.value,
-            amount: constants.values.crystals.ESMERALDA.amount
-          },
-          {
-            name: constants.values.crystals.SAFIRA.name,
-            value: constants.values.crystals.SAFIRA.value,
-            amount: constants.values.crystals.SAFIRA.amount
-          },
-          {
-            name: constants.values.crystals.RUBI.name,
-            value: constants.values.crystals.RUBI.value,
-            amount: constants.values.crystals.RUBI.amount
-          },
-          {
-            name: constants.values.crystals.AMBAR.name,
-            value: constants.values.crystals.AMBAR.value,
-            amount: constants.values.crystals.AMBAR.amount
-          },
-          {
-            name: constants.values.crystals.AUTUNITA.name,
-            value: constants.values.crystals.AUTUNITA.value,
-            amount: constants.values.crystals.AUTUNITA.amount
-          }
-        ]
-      };
 
-      database.Caves.create(caveData, (err, cave) => {
+      let playersData = [];
+      room.users.forEach(user => {
+        playersData.push(generatePlayer(user._id));
+      });
+      playersData[Math.floor(Math.random() * (playersData.length - 1))].currentTurn = true;
+
+      database.Players.insertMany(playersData, (err, players) => {
         if (err) {
           return res.status(500).json({
             msg: constants.messages.error.UNEXPECTED_DB
           });
         }
-        let playersData = [];
-        room.users.forEach(user => {
-          let userData = {
-            user: user.id,
-            crystals: initialCrystals
-          };
-          playersData.push(userData);
-        });
-        playersData[Math.floor(Math.random() * (playersData.length - 1))].currentTurn = true;
-
-        database.Players.insertMany(playersData, (err, players) => {
+        database.Players.populate(players, { path: 'user', select: 'username' }, (err, players) => {
           if (err) {
             return res.status(500).json({
               msg: constants.messages.error.UNEXPECTED_DB
             });
           }
-            database.Players.populate(players, { path: 'user', select: 'username' } , (err, players) => {
-              if (err) {
-                return res.status(500).json({
-                  msg: constants.messages.error.UNEXPECTED_DB
-                });
-              }
-              let gameData = {
-                name: room.name,
-                players: players,
-                cave: cave,
-                cardsBoard: [],
-                cardsPile: [],
-                cardsDiscarded: []
-              };
-              database.Games.create(gameData, (err, game) => {
-                if (err) {
-                  return res.status(500).json({
-                    msg: constants.messages.error.UNEXPECTED_DB
-                  });
-                }
-                io.emit(roomId, constants.sockets.types.START_GAME, game);
-                return res.status(200).json({
-                  msg: game
-                });
+          let gameData = {
+            name: room.name,
+            players: players,
+            cave: generateCave(),
+            cardsBoard: generateCardPile(),
+            cardsPile: generateCardPile(),
+            cardsDiscarded: generateCardPile()
+          };
+          database.Games.create(gameData, (err, game) => {
+            if (err) {
+              return res.status(500).json({
+                msg: constants.messages.error.UNEXPECTED_DB
               });
-          })
+            }
+            io.emit(roomId, constants.sockets.types.START_GAME, game);
+            return res.status(200).json({
+              msg: game
+            });
+          });
         });
       });
     });
