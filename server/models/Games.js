@@ -6,8 +6,8 @@ module.exports = mongoose => {
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'Caves' 
     },
-    cardsBoard: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Cards' }],
-    cardsPile: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Cards' } ],
-    cardsDiscarded: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Cards' } ]
+    cardsBoard: [ mongoose.Schema.Cards ],
+    cardsPile: [ mongoose.Schema.Cards ],
+    cardsDiscarded: [ mongoose.Schema.Cards ]
   });
 };

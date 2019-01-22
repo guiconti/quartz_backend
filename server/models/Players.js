@@ -1,10 +1,6 @@
 module.exports = mongoose => {
   return new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
-      default: ''
-    },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
     money: {
       type: Number,
       required: false,

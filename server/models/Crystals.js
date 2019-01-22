@@ -32,7 +32,7 @@ module.exports = mongoose => {
     },
     amount: {
       type: Number,
-      required: true,
+      required: false,
       default: 0
     }
   });
