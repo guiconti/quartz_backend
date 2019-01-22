@@ -12,6 +12,11 @@ module.exports = mongoose => {
       type: Boolean,
       required: false,
       default: false
+    },
+    currentTurn: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   });
 };

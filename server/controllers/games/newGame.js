@@ -155,6 +155,7 @@ module.exports = (req, res) => {
           };
           playersData.push(userData);
         });
+        playersData[Math.floor(Math.random() * (playersData.length - 1))].currentTurn = true;
 
         database.Players.insertMany(playersData, (err, players) => {
           if (err) {
