@@ -61,7 +61,7 @@ module.exports = (req, res) => {
           msg: constants.messages.error.UNEXPECTED_DB
         });
       }
-      if (room.owner._id !== req.user._id) {
+      if (String(room.owner._id) !== String(req.user._id)) {
         return res.status(403).json({
           msg: constants.messages.error.NOT_OWNER
         });
@@ -176,6 +176,7 @@ module.exports = (req, res) => {
                 msg: constants.messages.error.UNEXPECTED_DB
               });
             }
+            io.emit(roomId, constants.sockets.types.START_GAME, game);
             return res.status(200).json({
               msg: game
             });

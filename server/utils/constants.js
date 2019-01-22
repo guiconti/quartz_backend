@@ -39,7 +39,8 @@ module.exports = {
       JOIN_ROOM: 'joinRoom',
       LEAVE_ROOM: 'leaveRoom',
       NEW_USER: 'newUser',
-      NEW_MESSAGE: 'newMessage'
+      NEW_MESSAGE: 'newMessage',
+      START_GAME: 'startGame',
     }
   },
   values: {
