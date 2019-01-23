@@ -1,16 +1,22 @@
 const socketIO = require('socket.io');
 let io = null;
+const constants = require('./constants');
 
 exports.emit = (namespace, type, content) => {
   io
-    .of(`/${namespace}`)
+    .to(namespace)
     .emit(type, content);
 };
 
 exports.initialize = server => {
   io = socketIO(server);
 
-  io.on('connection', socket => {
-    console.log('connection');
+  io.on(constants.sockets.types.CONNECT, socket => {
+    socket.on(constants.sockets.types.JOIN_ROOM, roomId => {
+      socket.join(roomId);
+    });
+    socket.on(constants.sockets.types.LEAVE_ROOM, roomId => {
+      socket.leave(roomId);
+    });
   });
 };

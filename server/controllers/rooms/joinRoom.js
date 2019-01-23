@@ -31,6 +31,7 @@
 const database = require('../../models/database');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
+const io = require('../../utils/io');
 
 /**
  * Add user to a room
@@ -76,6 +77,7 @@ module.exports = (req, res) => {
             msg: constants.messages.error.UNEXPECTED_DB
           });
         }
+        io.emit(roomId, constants.sockets.types.NEW_USER, req.user);
         return res.status(200).json({
           msg: savedRoom
         });

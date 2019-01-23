@@ -1,10 +1,6 @@
 module.exports = mongoose => {
   return new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
-      default: ''
-    },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
     money: {
       type: Number,
       required: false,
@@ -16,6 +12,16 @@ module.exports = mongoose => {
       type: Boolean,
       required: false,
       default: false
+    },
+    currentTurn: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    isRoundActive: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   });
 };

@@ -17,6 +17,10 @@ module.exports = {
       INVALID_ROOM: 'Room id sent is not valid.',
       INVALID_PARENT: 'Parent id sent is not valid.',
       INVALID_CONTENT: 'Message\'s content is not valid.',
+      INVALID_PLAYERS: 'Players sent are not valid.',
+      INVALID_GAME: 'Game id sent is not valid.',
+      NOT_OWNER: 'You do not own this room.',
+      ROOM_NOT_ENABLE: 'This room is not enable to start the game.',
       ROOM_NOT_FOUND: 'This room id does not correspond to a valid room.',
       INACTIVE_ROOM: 'This room is not accepting new users anymore.',
       USERNAME_NOT_UNIQUE: 'This username is already being used',
@@ -32,7 +36,12 @@ module.exports = {
   },
   sockets: {
     types: {
-      USER_MESSAGE: 'user_message'
+      CONNECT: 'connection',
+      JOIN_ROOM: 'joinRoom',
+      LEAVE_ROOM: 'leaveRoom',
+      NEW_USER: 'newUser',
+      NEW_MESSAGE: 'newMessage',
+      START_GAME: 'startGame',
     }
   },
   values: {
@@ -45,31 +54,38 @@ module.exports = {
     crystals: {
       QUARTZO: {
         name: 'Quartzo',
-        value: 1
+        value: 1,
+        amount: 15
       },
       RUBELITA: {
         name: 'Rubelita',
-        value: 2
+        value: 2,
+        amount: 12
       },
       ESMERALDA: {
         name: 'Esmeralda',
-        value: 3
+        value: 3,
+        amount: 10
       },
       SAFIRA: {
         name: 'Safira',
-        value: 4
+        value: 4,
+        amount: 7
       },
       RUBI: {
         name: 'Rubi',
-        value: 6
+        value: 6,
+        amount: 4
       },
       AMBAR: {
         name: 'Âmbar',
-        value: 8
+        value: 8,
+        amount: 2
       },
       AUTUNITA: {
         name: 'Autunita',
-        value: 0
+        value: 0,
+        amount: 18
       }
     },
     cards: {
