@@ -1,7 +1,13 @@
 {
   "development": {
     "NODE_ENV": "development",
-    "PORT": 3100
+    "PORT": 3100,
+    "CORS_ORIGIN": "http://localhost:3330"
+  },
+  "pilot": {
+    "NODE_ENV": "pilot",
+    "PORT": 3100,
+    "CORS_ORIGIN": "http://quartz.tiimus.com"
   },
   "production": {
     "NODE_ENV": "production",
