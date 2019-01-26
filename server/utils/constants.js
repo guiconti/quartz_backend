@@ -43,6 +43,8 @@ module.exports = {
       NEW_USER: 'newUser',
       NEW_MESSAGE: 'newMessage',
       START_GAME: 'startGame',
+      JOIN_GAME: 'joinGame',
+      LEAVE_GAME: 'leaveGame',
     }
   },
   values: {
