@@ -56,6 +56,7 @@ module.exports = (req, res) => {
       path: 'players.user',
       select: 'username'
     })
+    .select('name players.user')
     .sort({ created: 'desc'})
     .limit(limit)
     .exec((err, games) => {
