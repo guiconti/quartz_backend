@@ -37,11 +37,8 @@ module.exports = (req, res, next) => {
   return database.Games
     .findById(gameId)
     .populate({
-      path: 'players',
-      populate: {
-        path: 'user',
-        select: 'username'
-      }
+      path: 'players.user',
+      select: 'username'
     })
     .exec((err, game) => {
       if (err) {
@@ -64,11 +61,13 @@ module.exports = (req, res, next) => {
 
       if (playerIndex < 0) {
         return res.status(401).json({
-          msg: constants.messages.error.USER_NOT_PALYING
+          msg: constants.messages.error.USER_NOT_PLAYING
         });
       }
       
-      req = { game, user, playerIndex, ...req };
+      req.game = game;
+      req.user = user;
+      req.playerIndex = playerIndex;
       return next();
     });
 };

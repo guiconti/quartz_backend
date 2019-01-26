@@ -7,7 +7,7 @@ module.exports = mongoose => {
       default: 0
     },
     crystals: [ mongoose.Schema.Crystals ],
-    cards: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Cards' } ],
+    cards: [ mongoose.Schema.Cards ],
     hasAnIdiotBook: {
       type: Boolean,
       required: false,

@@ -81,37 +81,23 @@ module.exports = (req, res) => {
       });
       playersData[Math.floor(Math.random() * (playersData.length - 1))].currentTurn = true;
 
-      database.Players.insertMany(playersData, (err, players) => {
+      let gameData = {
+        name: room.name,
+        players: playersData,
+        cave: generateCave(),
+        cardsBoard: generateCardPile(),
+        cardsPile: generateCardPile(),
+        cardsDiscarded: generateCardPile()
+      };
+      database.Games.create(gameData, (err, game) => {
         if (err) {
           return res.status(500).json({
             msg: constants.messages.error.UNEXPECTED_DB
           });
         }
-        database.Players.populate(players, { path: 'user', select: 'username' }, (err, players) => {
-          if (err) {
-            return res.status(500).json({
-              msg: constants.messages.error.UNEXPECTED_DB
-            });
-          }
-          let gameData = {
-            name: room.name,
-            players: players,
-            cave: generateCave(),
-            cardsBoard: generateCardPile(),
-            cardsPile: generateCardPile(),
-            cardsDiscarded: generateCardPile()
-          };
-          database.Games.create(gameData, (err, game) => {
-            if (err) {
-              return res.status(500).json({
-                msg: constants.messages.error.UNEXPECTED_DB
-              });
-            }
-            io.emit(roomId, constants.sockets.types.START_GAME, game);
-            return res.status(200).json({
-              msg: game
-            });
-          });
+        io.emit(roomId, constants.sockets.types.START_GAME, game);
+        return res.status(200).json({
+          msg: game
         });
       });
     });

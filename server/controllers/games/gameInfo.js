@@ -212,11 +212,8 @@ module.exports = (req, res) => {
   database.Games
     .findById(gameId)
     .populate({
-      path: 'players',
-      populate: {
-        path: 'user',
-        select: 'username'
-      }
+      path: 'players.user',
+      select: 'username'
     })
     .exec((err, game) => {
       if (err) {
