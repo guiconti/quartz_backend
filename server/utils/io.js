@@ -21,7 +21,7 @@ exports.initialize = server => {
     socket.on(constants.sockets.types.JOIN_GAME, gameId => {
       socket.join(gameId);
     });
-    socket.on(constants.sockets.types.LEAE_GAME, gameId => {
+    socket.on(constants.sockets.types.LEAVE_GAME, gameId => {
       socket.leave(gameId);
     });
   });

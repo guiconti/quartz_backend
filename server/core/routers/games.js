@@ -10,6 +10,6 @@ const controllers = retrieveControllers(path.basename(__filename).split('.')[0])
 //  Games API
 router.post('/', userMiddleware, controllers.newGame);
 router.get('/:gameId', userMiddleware, controllers.gameInfo);
-router.get('/:gameId/crystal', gameMiddleware, controllers.gameInfo);
+router.get('/:gameId/crystal', gameMiddleware, controllers.pickCrystal);
 
 module.exports = router;
