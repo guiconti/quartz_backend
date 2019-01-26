@@ -40,8 +40,11 @@ module.exports = (req, res) => {
   game.cave.crystals[crystalIndex].amount--;
   game.players[playerIndex].crystals[crystalIndex].amount++;
   const crystalPicked = {
-    player: game.players[playerIndex],
-    crystal: game.cave.crystals[crystalIndex]
+    player: {
+      username: game.players[playerIndex].user.username,
+      _id: game.players[playerIndex]._id
+    },
+    crystal: game.cave.crystals[crystalIndex].name
   };
   game = nextTurn(game, playerIndex);
 
