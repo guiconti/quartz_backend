@@ -15,6 +15,7 @@
   *
  */
 const io = require('../../utils/io');
+const nextTurn = require('../../utils/nextTurn');
 const constants = require('../../utils/constants');
 
 /**
@@ -26,7 +27,7 @@ const constants = require('../../utils/constants');
  *
  */
 module.exports = (req, res) => {
-  let { game, user, playerIndex } = req;
+  let { game, playerIndex } = req;
 
   if (!game.players[playerIndex].currentTurn) {
     return res.status(400).json({
@@ -40,7 +41,8 @@ module.exports = (req, res) => {
   let crystalIndex = crystalPicker[Math.floor(Math.random() * (crystalPicker.length - 1))];
   game.cave.crystals[crystalIndex].amount--;
   game.players[playerIndex].crystals[crystalIndex].amount++;
-  
+  game = nextTurn(game, playerIndex);
+
   game.save((err, savedGame) => {
     if (err) {
       return res.status(500).json({
