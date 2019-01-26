@@ -16,6 +16,11 @@ module.exports = mongoose => {
       required: false,
       default: 1
     },
+    active: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
     created: { type: Date, default: Date.now }
   });
 };

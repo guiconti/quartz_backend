@@ -9,6 +9,7 @@ const controllers = retrieveControllers(path.basename(__filename).split('.')[0])
 
 //  Games API
 router.post('/', userMiddleware, controllers.newGame);
+router.get('/', userMiddleware, controllers.retrieveGames);
 router.get('/:gameId', userMiddleware, controllers.gameInfo);
 router.get('/:gameId/crystal', gameMiddleware, controllers.pickCrystal);
 router.patch('/:gameId/close_mine', gameMiddleware, controllers.closeMine);
