@@ -1,6 +1,6 @@
 /**
- * Module to check if round is over
- * @module utils/isRoundOver
+ * Module to setup next round
+ * @module utils/nextRound
  */
 
 const generateCave = require('./generateCave');
@@ -43,5 +43,7 @@ module.exports = (game, playerIndex) => {
     ];
   });
   game.players[playerIndex].currentTurn = true;
+  game.round++;
+  game.isSelling = false;
   return game;
 };
