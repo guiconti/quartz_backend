@@ -15,6 +15,7 @@
 const io = require('../../utils/io');
 const nextTurn = require('../../utils/nextTurn');
 const isRoundOver = require('../../utils/isRoundOver');
+const nextRound = require('../../utils/nextRound');
 const constants = require('../../utils/constants');
 
 /**
@@ -35,7 +36,7 @@ module.exports = (req, res) => {
   }
   game.players[playerIndex].isRoundActive = false;
   if (isRoundOver(game)) {
-    // TODO: Open selling
+    game = nextRound(game, playerIndex);
   } else {
     game = nextTurn(game, playerIndex);
   }

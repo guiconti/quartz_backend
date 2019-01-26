@@ -5,6 +5,16 @@ module.exports = mongoose => {
     cave: mongoose.Schema.Caves,
     cardsBoard: [ mongoose.Schema.Cards ],
     cardsPile: [ mongoose.Schema.Cards ],
-    cardsDiscarded: [ mongoose.Schema.Cards ]
+    cardsDiscarded: [ mongoose.Schema.Cards ],
+    isSelling: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    round: {
+      type: Number,
+      required: false,
+      default: 1
+    }
   });
 };
