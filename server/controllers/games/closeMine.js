@@ -1,12 +1,12 @@
 /**
- * @api {GET} /games/:gameId/crystal Pick a crystal
- * @apiName Pick a crystal for the user
+ * @api {GET} /games/:gameId/close_mine Close player's mine
+ * @apiName Close mine for user
  * @apiGroup Games
  * @apiVersion 1.0.0
  *
  * @apiSuccess (200) {String} msg Picked crystal info.
  * @apiSuccessExample {json} Success-Response:
-    "msg": "Crystal picked."
+    "msg": "Mine closed."
  * @apiError (500) {String} msg Error message.
  * @apiErrorExample {json} Error-Response:
     { "msg": "Database connection error." }
@@ -14,10 +14,11 @@
  */
 const io = require('../../utils/io');
 const nextTurn = require('../../utils/nextTurn');
+const isRoundOver = require('../../utils/isRoundOver');
 const constants = require('../../utils/constants');
 
 /**
- * Retrieve a crystal for user
+ * Close mine's user
  *
  * @param {string} req.params.gameId - Game id to retrieve info 
  * @return {object} - Returns the game in a json format
@@ -32,14 +33,12 @@ module.exports = (req, res) => {
       msg: constants.messages.error.NOT_USERS_TURN
     });
   }
-  let crystalPicker = '';
-  for (let i = 0; i < game.cave.crystals.length; i++){
-    crystalPicker += String(i).repeat(game.cave.crystals[i].amount);
+  game.players[playerIndex].isRoundActive = false;
+  if (isRoundOver(game)) {
+    // TODO: Open selling
+  } else {
+    game = nextTurn(game, playerIndex);
   }
-  let crystalIndex = crystalPicker[Math.floor(Math.random() * (crystalPicker.length - 1))];
-  game.cave.crystals[crystalIndex].amount--;
-  game.players[playerIndex].crystals[crystalIndex].amount++;
-  game = nextTurn(game, playerIndex);
 
   game.save((err, savedGame) => {
     if (err) {
@@ -49,7 +48,7 @@ module.exports = (req, res) => {
     }
     io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
     return res.status(200).json({
-      msg: constants.messages.info.CRYSTAL_PICKED
+      msg: constants.messages.info.MINE_CLOSED
     });
   });
 };

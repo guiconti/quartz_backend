@@ -7,7 +7,8 @@ module.exports = {
     info: {
       USER_LOGGED_OUT: 'User logged out.',
       MESSAGE_SENT: 'Message sent.',
-      CRYSTAL_PICKED: 'Crystal picked.'
+      CRYSTAL_PICKED: 'Crystal picked.',
+      MINE_CLOSED: 'Mine closed.'
     },
     error: {
       INVALID_NAME: 'Name sent is not valid.',

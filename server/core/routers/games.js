@@ -11,5 +11,6 @@ const controllers = retrieveControllers(path.basename(__filename).split('.')[0])
 router.post('/', userMiddleware, controllers.newGame);
 router.get('/:gameId', userMiddleware, controllers.gameInfo);
 router.get('/:gameId/crystal', gameMiddleware, controllers.pickCrystal);
+router.patch('/:gameId/close_mine', gameMiddleware, controllers.closeMine);
 
 module.exports = router;
