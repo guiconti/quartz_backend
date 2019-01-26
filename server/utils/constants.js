@@ -48,7 +48,8 @@ module.exports = {
       START_GAME: 'startGame',
       JOIN_GAME: 'joinGame',
       LEAVE_GAME: 'leaveGame',
-      UPDATE_GAME: 'updateGame'
+      UPDATE_GAME: 'updateGame',
+      CRYSTAL_PICKED: 'crystalPicked'
     }
   },
   values: {

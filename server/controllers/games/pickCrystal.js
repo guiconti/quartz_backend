@@ -39,6 +39,10 @@ module.exports = (req, res) => {
   let crystalIndex = crystalPicker[Math.floor(Math.random() * (crystalPicker.length - 1))];
   game.cave.crystals[crystalIndex].amount--;
   game.players[playerIndex].crystals[crystalIndex].amount++;
+  const crystalPicked = {
+    player: game.players[playerIndex],
+    crystal: game.cave.crystals[crystalIndex]
+  };
   game = nextTurn(game, playerIndex);
 
   game.save((err, savedGame) => {
@@ -47,6 +51,8 @@ module.exports = (req, res) => {
         msg: constants.messages.error.UNEXPECTED_DB
       });
     }
+    
+    io.emit(String(savedGame._id), constants.sockets.types.CRYSTAL_PICKED, crystalPicked);
     io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
     return res.status(200).json({
       msg: constants.messages.info.CRYSTAL_PICKED
