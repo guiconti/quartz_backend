@@ -64,12 +64,20 @@ module.exports = (req, res) => {
         msg: constants.messages.error.ROOM_NOT_FOUND
       });
     }
+    //  Check if user already belongs to room
+    for (let i = 0; i < room.users.length; i++) {
+      if (String(room.users[i]) === String(req.user._id)) {
+        return res.status(200).json({
+          msg: room
+        });
+      }
+    }
     if (!room.active || room.users.length >= constants.values.MAX_ROOM_USERS) {
       return res.status(400).json({
         msg: constants.messages.error.INACTIVE_ROOM
       });
     }
-    room.users.addToSet(req.user.id);
+    room.users.addToSet(req.user._id);
     room
       .save((err, savedRoom) => {
         if (err) {

@@ -39,7 +39,7 @@ const io = require('../../utils/io');
  */
 module.exports = (req, res) => {
   let { parent, content } = req.body;
-  const owner = req.user.id;
+  const owner = req.user._id;
 
   if (!validator.isValidString(parent)) {
     return res.status(400).json({

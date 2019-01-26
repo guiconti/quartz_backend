@@ -41,9 +41,9 @@ const constants = require('../../utils/constants');
  */
 module.exports = (req, res) => {
   let { name } = req.body;
-  const owner = req.user.id;
+  const owner = req.user._id;
   const users = [
-    req.user.id
+    req.user._id
   ];
 
   if (!validator.isValidString(name)) {
