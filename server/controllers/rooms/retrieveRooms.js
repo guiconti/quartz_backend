@@ -45,16 +45,21 @@ const constants = require('../../utils/constants');
  */
 module.exports = (req, res) => {
   let filters = {};
-  let { active } = req.query;
+  let { active, limit } = req.query;
 
   if (validator.isValidString(active)) {
     filters = { active, ...filters };
+  }
+  if (validator.isValidInteger(limit)) {
+    limit = parseInt(limit);
   }
 
   database.Rooms
     .find(filters)
     .populate('owner', 'username')
     .populate('users', 'username')
+    .sort({ created: 'desc'})
+    .limit(limit)
     .exec((err, rooms) => {
     if (err) {
       return res.status(500).json({

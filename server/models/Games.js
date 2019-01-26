@@ -15,6 +15,7 @@ module.exports = mongoose => {
       type: Number,
       required: false,
       default: 1
-    }
+    },
+    created: { type: Date, default: Date.now }
   });
 };
