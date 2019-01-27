@@ -11,6 +11,7 @@ module.exports = game => {
   game.players.forEach(player => {
     player.isRoundActive = true;
     player.currentTurn = false;
+    player.soldCrystals = false;
     for (let i = 0; i < game.cave.crystals.length - 1; i++) {
       game.cave.crystals[i].amount -= player.crystals[i].amount;
     }

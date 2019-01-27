@@ -102,7 +102,16 @@ exports.isValidSelling = (game, playerIndex, keepCrystals, combo) => {
     combo.type === constants.values.combos.types.FOUR_MULTIPLY_TWO) {
     if (!combo.conversion)
       return false;
-    if (typeof combo.conversion.from !== 'string' || !Object.keys(constants.values.crystals)[combo.conversion.from.toUpperCase()])
+    if (typeof combo.conversion.from !== 'string')
+      return false;
+    let fromExists = false;
+    for (let i = 0; i < Object.keys(constants.values.crystals).length - 1; i++) {
+      if (Object.keys(constants.values.crystals)[i] === combo.conversion.from.toUpperCase()) {
+        fromExists = true;
+        break;
+      }
+    }
+    if (!fromExists)
       return false;
   }
   if (keepCrystals.length !== Object.keys(constants.values.crystals).length - 1) {
