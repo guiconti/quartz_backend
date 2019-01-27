@@ -38,4 +38,4 @@ if (SSL) {
 
 require('../server/utils/io').initialize(http);
 
-module.exports = app;
+module.exports = http;

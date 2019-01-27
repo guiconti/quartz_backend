@@ -7,7 +7,7 @@
   "pilot": {
     "NODE_ENV": "development",
     "PORT": 3100,
-    "CORS_ORIGIN": "http://quartz.tiimus.com"
+    "CORS_ORIGIN": "https://quartz.tiimus.com"
   },
   "production": {
     "NODE_ENV": "production",
