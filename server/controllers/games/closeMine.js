@@ -36,7 +36,7 @@ module.exports = (req, res) => {
   }
   game.players[playerIndex].isRoundActive = false;
   if (isRoundOver(game)) {
-    game = nextRound(game, playerIndex);
+    game.isSelling = true;
   } else {
     game = nextTurn(game, playerIndex);
   }

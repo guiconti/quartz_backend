@@ -109,6 +109,7 @@ module.exports = {
     },
     combos: {
       types: {
+        NO_COMBO: -1,
         THREE_MULTIPLY_ONE: 0,
         FOUR_MULTIPLY_TWO: 1,
         FIVE_TO_EIGTH_COINS: 2,

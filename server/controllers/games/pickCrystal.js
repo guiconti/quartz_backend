@@ -53,7 +53,7 @@ module.exports = (req, res) => {
   if (didPlayerExploded(game, playerIndex)) {
     game = playerExploded(game, playerIndex);
     if (isRoundOver(game)) {
-      game = nextRound(game, playerIndex);
+      game.isSelling = true;
     } else {
       game = nextTurn(game, playerIndex);
     }
