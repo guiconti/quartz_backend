@@ -64,6 +64,7 @@ module.exports = {
     TOKEN_EXPIRATION_IN_SECONDS: 60 * 60 * 24 * 30,
     TOKEN_NAME: 'session',
     MAX_ROOM_USERS: 4,
+    MAX_ROUNDS: 4,
     crystals: {
       QUARTZO: {
         name: 'Quartzo',

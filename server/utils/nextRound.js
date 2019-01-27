@@ -16,6 +16,10 @@ module.exports = game => {
       game.cave.crystals[i].amount -= player.crystals[i].amount;
     }
   });
+  if (game.round >= constants.values.MAX_ROUNDS) {
+    game.active = false;
+    return game;
+  }
   game.players[Math.floor(Math.random() * (game.players.length - 1))].currentTurn = true;
   game.round++;
   game.isSelling = false;
