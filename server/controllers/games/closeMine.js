@@ -35,6 +35,7 @@ module.exports = (req, res) => {
     });
   }
   game.players[playerIndex].isRoundActive = false;
+  game.players[playerIndex].currentTurn = false;
   if (isRoundOver(game)) {
     game.isSelling = true;
   } else {

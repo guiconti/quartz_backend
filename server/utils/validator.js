@@ -102,10 +102,10 @@ exports.isValidSelling = (game, playerIndex, keepCrystals, combo) => {
     combo.type === constants.values.combos.types.FOUR_MULTIPLY_TWO) {
     if (!combo.conversion)
       return false;
-    if (typeof combo.conversion.from !== 'string' || !Object(constants.values.crystals)[combo.conversion.from.toUpperCase()])
+    if (typeof combo.conversion.from !== 'string' || !Object.keys(constants.values.crystals)[combo.conversion.from.toUpperCase()])
       return false;
   }
-  if (keepCrystals.length !== Object(constants.values.crystals).length - 1) {
+  if (keepCrystals.length !== Object.keys(constants.values.crystals).length - 1) {
     return false;
   }
   for (let i = 0; i < keepCrystals.length; i++) {
@@ -117,16 +117,23 @@ exports.isValidSelling = (game, playerIndex, keepCrystals, combo) => {
   }
   let isValidSelling = true;
   switch (combo.type) {
+    case constants.values.combos.types.NO_COMBO:
+      for (let i = 0; i < game.players[playerIndex].crystals.length - 1; i++) {
+        if (game.players[playerIndex].crystals[i].amount - keepCrystals[i] < 0) {
+          isValidSelling = false;
+          break;
+        }
+      }
+      break;
     case constants.values.combos.types.THREE_MULTIPLY_ONE:
       for (let i = 0; i < game.players[playerIndex].crystals.length - 1; i++) {
-        if (game.players[playerIndex].crystals.name === combo.conversion.from) {
-          if (game.players[playerIndex].crystals.amount - keepCrystals[i] < 3) {
+        if (game.players[playerIndex].crystals[i].name === combo.conversion.from) {
+          if (game.players[playerIndex].crystals[i].amount - keepCrystals[i] < 3) {
             isValidSelling = false;
             break;
           }
         }
       }
-
       break;
     case constants.values.combos.types.FOUR_MULTIPLY_TWO:
       for (let i = 0; i < game.players[playerIndex].crystals.length - 1; i++) {

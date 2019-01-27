@@ -9,7 +9,7 @@ module.exports = (game, playerIndex, keepCrystals, combo) => {
   switch (combo.type) {
     case constants.values.combos.types.THREE_MULTIPLY_ONE:
       for (let i = 0; i < game.players[playerIndex].crystals.length - 1; i++) {
-        if (game.players[playerIndex].crystals.name === combo.conversion.toFirst) {
+        if (game.players[playerIndex].crystals[i].name === combo.conversion.toFirst) {
           game.players[playerIndex].money += 
             (game.players[playerIndex].crystals[i].amount - keepCrystals[i]) * game.players[playerIndex].crystals[i].value;
         }
@@ -20,8 +20,8 @@ module.exports = (game, playerIndex, keepCrystals, combo) => {
       break;
     case constants.values.combos.types.FOUR_MULTIPLY_TWO:
       for (let i = 0; i < game.players[playerIndex].crystals.length - 1; i++) {
-        if (game.players[playerIndex].crystals.name === combo.conversion.toFirst || 
-          game.players[playerIndex].crystals.name === combo.conversion.toSecond) {
+        if (game.players[playerIndex].crystals[i].name === combo.conversion.toFirst || 
+          game.players[playerIndex].crystals[i].name === combo.conversion.toSecond) {
           game.players[playerIndex].money += 
             (game.players[playerIndex].crystals[i].amount - keepCrystals[i]) * game.players[playerIndex].crystals[i].value;
         }

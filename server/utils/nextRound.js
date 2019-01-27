@@ -11,11 +11,11 @@ module.exports = game => {
   game.players.forEach(player => {
     player.isRoundActive = true;
     player.currentTurn = false;
-    for (let i = 0; i < game.cave.crytals.length - 1; i++) {
+    for (let i = 0; i < game.cave.crystals.length - 1; i++) {
       game.cave.crystals[i].amount -= player.crystals[i].amount;
     }
   });
-  game.players[Math.floor(Math.random() * (game.player.length - 1))].currentTurn = true;
+  game.players[Math.floor(Math.random() * (game.players.length - 1))].currentTurn = true;
   game.round++;
   game.isSelling = false;
   return game;

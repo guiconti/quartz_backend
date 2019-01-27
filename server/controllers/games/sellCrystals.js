@@ -31,6 +31,9 @@ module.exports = (req, res) => {
   let { game, playerIndex } = req;
   let { keepCrystals, combo } = req.body;
 
+  console.log(keepCrystals);
+  console.log(combo);
+
   if (!game.isSelling) {
     return res.status(400).json({
       msg: constants.messages.error.SELLING_NOT_AVAILABLE
