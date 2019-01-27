@@ -54,6 +54,7 @@ module.exports = (game, playerIndex, keepCrystals, combo) => {
       }
       break;
   }
+  game.players[playerIndex].crystals[game.players[playerIndex].crystals.length - 1].amount = 0;
   game.players[playerIndex].soldCrystals = true;
   return game;
 };

@@ -55,7 +55,7 @@ module.exports = (req, res) => {
   game = performSelling(game, playerIndex, keepCrystals, combo);
   moneyWon = game.players[playerIndex].money - moneyWon;
   if (isSellingOver(game)) {
-    game = nextRound(game, playerIndex);
+    game = nextRound(game);
   }
 
   game.save((err, savedGame) => {

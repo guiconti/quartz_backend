@@ -13,5 +13,6 @@ router.get('/', userMiddleware, controllers.retrieveGames);
 router.get('/:gameId', userMiddleware, controllers.gameInfo);
 router.get('/:gameId/crystal', gameMiddleware, controllers.pickCrystal);
 router.patch('/:gameId/close_mine', gameMiddleware, controllers.closeMine);
+router.patch('/:gameId/sell', gameMiddleware, controllers.sellCrystals);
 
 module.exports = router;
