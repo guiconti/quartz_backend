@@ -24,7 +24,18 @@ app.use('/', router);
 app.use(logger.errorHandler());
 app.use(morgan('tiny'));
 
-const http = require('http').Server(app);
+let http;
+
+const setupSSL = require('./setupSSL');
+const SSL = setupSSL();
+
+if (SSL) {
+  console.log('SSL Initialized');
+  http = require('https').createServer(SSL, app);
+} else {
+  http = require('http').Server(app);
+}
+
 require('../server/utils/io').initialize(http);
 
-module.exports = http;
+module.exports = app;
