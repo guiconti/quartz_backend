@@ -113,6 +113,10 @@ module.exports = {
         FOUR_MULTIPLY_TWO: 1,
         FIVE_TO_EIGTH_COINS: 2,
         SIX_TO_TWELVE_COINS: 3
+      },
+      money: {
+        FIVE_TO_EIGTH_COINS: 8,
+        SIX_TO_TWELVE_COINS: 12
       }
     },
     errorCodes: {

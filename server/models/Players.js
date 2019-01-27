@@ -13,6 +13,11 @@ module.exports = mongoose => {
       required: false,
       default: false
     },
+    soldCrystals: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     currentTurn: {
       type: Boolean,
       required: false,

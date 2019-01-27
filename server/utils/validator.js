@@ -98,23 +98,20 @@ exports.isValidImage = fileToValidate => {
  * @return {boolean} - True case the file is valid and false if it is not
  */
 exports.isValidSelling = (game, playerIndex, keepCrystals, combo) => {
-  if (!combo.conversion) {
-    return false;
-  }
-  if (typeof combo.conversion.from !== 'string' || !Object(constants.values.crystals)[combo.conversion.from.toUpperCase()]) {
-    return false;
-  }
-  if (typeof combo.conversion.toFirst !== 'string' || !Object(constants.values.crystals)[combo.conversion.toFirst.toUpperCase()]) {
-    return false;
-  }
-  if (typeof combo.conversion.toSecond !== 'string' || !Object(constants.values.crystals)[combo.conversion.toSecond.toUpperCase()]) {
-    return false;
+  if (combo.type === constants.values.combos.types.THREE_MULTIPLY_ONE || 
+    combo.type === constants.values.combos.types.FOUR_MULTIPLY_TWO) {
+    if (!combo.conversion)
+      return false;
+    if (typeof combo.conversion.from !== 'string' || !Object(constants.values.crystals)[combo.conversion.from.toUpperCase()])
+      return false;
   }
   if (keepCrystals.length !== Object(constants.values.crystals).length - 1) {
     return false;
   }
   for (let i = 0; i < keepCrystals.length; i++) {
     if (keepCrystals[i] < 0 || keepCrystals[i] > 2) {
+      return false;
+    } else if (game.players[playerIndex].crystals[i].amount < keepCrystals[i]) {
       return false;
     }
   }
