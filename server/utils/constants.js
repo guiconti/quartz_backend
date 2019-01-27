@@ -21,9 +21,14 @@ module.exports = {
       INVALID_CONTENT: 'Message\'s content is not valid.',
       INVALID_PLAYERS: 'Players sent are not valid.',
       INVALID_GAME: 'Game id sent is not valid.',
+      INVALID_SELLING: 'Selling data sent is not valid.',
       USER_NOT_PLAYING: 'This user is not a member of this game.',
       NOT_USERS_TURN: 'This is not the user\'s turn.',
       NOT_OWNER: 'You do not own this room.',
+      SELLING_NOT_AVAILABLE: 'Selling is not available at the moment.',
+      ALREADY_SOLD: 'You already sold your crystals.',
+      INVALID_CRYSTALS_TO_KEEP: 'Crystals to keep sent are invalid.',
+      INVALID_COMBO: 'Combo sent is invalid.',
       ROOM_NOT_ENABLE: 'This room is not enable to start the game.',
       ROOM_NOT_FOUND: 'This room id does not correspond to a valid room.',
       INACTIVE_ROOM: 'This room is not accepting new users anymore.',
@@ -100,6 +105,14 @@ module.exports = {
       types: {
         OFFENSIVE: 'OFFENSIVE',
         DEFENSIVE: 'DEFENSIVE'
+      }
+    },
+    combos: {
+      types: {
+        THREE_MULTIPLY_ONE: 0,
+        FOUR_MULTIPLY_TWO: 1,
+        FIVE_TO_EIGTH_COINS: 2,
+        SIX_TO_TWELVE_COINS: 3
       }
     },
     errorCodes: {
