@@ -98,6 +98,12 @@ exports.isValidImage = fileToValidate => {
  * @return {boolean} - True case the file is valid and false if it is not
  */
 exports.isValidSelling = (game, playerIndex, keepCrystals, combo) => {
+  let amountOfKeepCrystals = 0;
+  for (let i = 0; i < keepCrystals.length; i++) {
+    amountOfKeepCrystals += keepCrystals[i];
+    if (amountOfKeepCrystals < 0 || amountOfKeepCrystals > 2)
+      return false;
+  }
   if (combo.type === constants.values.combos.types.THREE_MULTIPLY_ONE || 
     combo.type === constants.values.combos.types.FOUR_MULTIPLY_TWO) {
     if (!combo.conversion)
