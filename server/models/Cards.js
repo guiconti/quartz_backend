@@ -7,6 +7,11 @@ module.exports = mongoose => {
       required: true,
       default: ''
     },
+    action: {
+      type: String,
+      required: true,
+      default: ''
+    },
     description: { 
       type: String, 
       required: true,
@@ -16,8 +21,8 @@ module.exports = mongoose => {
       type: String,
       required: true,
       enum: [
-        constants.values.cards.types.OFFENSIVE,
-        constants.values.cards.types.DEFENSIVE
+        constants.values.cards.types.ACTION,
+        constants.values.cards.types.REACTION
       ]
     },
     value: {

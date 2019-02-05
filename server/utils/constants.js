@@ -103,9 +103,114 @@ module.exports = {
       }
     },
     cards: {
+      list: [
+        {
+          name: 'Here we go',
+          action: 'hereWeGo',
+          description: `Mine three Crystals, all at once. If any of them are Obsidian, return them to the Mine
+          Bag. You may keep any or all of the Crystals and place them in your Mine Cart.`,
+          type: 'ACTION',
+          value: 10
+        },
+        {
+          name: 'Eureka!',
+          action: 'eureka',
+          description: `Mine seven Crystals. You may replace one of the Crystals in your Mine Cart with one of
+          the Crystals drawn. The other six crystals, and the one from your Mine Cart that was
+          replaced, are returned to the Mine Bag. Only the new Crystal is kept, and Obsidian may
+          not be replaced in this way.`,
+          type: 'ACTION',
+          value: 3
+        },
+        {
+          name: 'Come closer',
+          action: 'comeCloser',
+          description: `Trade one Crystal from your Mine Cart with one Crystal from the Mine Cart of a dwarf
+          who is still inside the Mine. Trading Obsidian in this way is not allowed.`,
+          type: 'ACTION',
+          value: 3
+        },
+        {
+          name: 'Out of my waaaay',
+          action: 'outOfMyWay',
+          description: `All other dwarves still in the mine must discard one random valuable Crystal (not
+            Obsidian) from their Mine Carts. The discarded Crystals are returned to the Mine Bag.`,
+          type: 'ACTION',
+          value: 3
+        },
+        {
+          name: 'Crystal? What crystal?',
+          action: 'crystalWhatCrystal',
+          description: `Place this card beside your Mine Cart. At the end of this turn, you may take one Crystal
+          from your Mine Cart and place it on this card. That Crystal is now protected against all
+          Action Card effects and Accidents. At the end of the day, return any Crystals on this card
+          to your Mine Cart and discard this card.`,
+          type: 'ACTION',
+          value: 3
+        },
+        {
+          name: 'Give me a hand here',
+          action: 'giveMeAHandHere',
+          description: `Choose another dwarf who must mine two Crystals. You may choose one of those
+          Crystals and place it on your Mine Cart. The miner must keep the remaining Crystal, even
+          if it is Obsidian. If both Crystals mined are Obsidian, the miner takes one, and the other is
+          returned to the Mine Bag.`,
+          type: 'ACTION',
+          value: 8
+        },
+        {
+          name: 'These don\'t belong to you',
+          action: 'theseDontBelongToYou',
+          description: `Steal two valuable Crystals from another dwarf’s Mine Cart. Obsidian cannot be stolen
+          in this way.`,
+          type: 'ACTION',
+          value: 8
+        },
+        {
+          name: 'This isn\'t mine',
+          action: 'thisIsntMine',
+          description: `Take one Obsidian from your cart and give it to any other dwarf that is still in the mine.
+          If the dwarf receiving the Obsidian already has an Obsidian in their Mine Cart, they will
+          suffer an Accident immediately.`,
+          type: 'ACTION',
+          value: 8
+        },
+        {
+          name: 'Not mine either!',
+          action: 'notMineEither',
+          description: `When someone gives you an Obsidian with the “This Isn’t Mine” action, you may play
+          this card and send that Obsidian to any other dwarf still in the mine. (However, the
+          Obsidian cannot be sent back to the dwarf who gave it to you.) If no other dwarves are
+          available, the Obsidian is returned to the Mine Bag.`,
+          type: 'REACTION',
+          value: 3
+        },
+        {
+          name: 'Thievery? Unacceptable!',
+          action: 'thieveryUnacceptable',
+          description: `If someone tries to steal two Crystals from you with the “These Don’t Belong To You”
+          Action Card, you may play this card to block that action. Instead, take one Crystal from
+          their Mine Cart.`,
+          type: 'REACTION',
+          value: 3
+        },
+        {
+          name: 'Nope. I am on a break',
+          action: 'nopeIAmOnABreak',
+          description: `Play this card to prevent another dwarf from forcing you to mine two Crystals with the
+          “Gimme A Hand Here” Action Card. `,
+          type: 'REACTION',
+          value: 3
+        },
+      ],
       types: {
-        OFFENSIVE: 'OFFENSIVE',
-        DEFENSIVE: 'DEFENSIVE'
+        ACTION: 'ACTION',
+        REACTION: 'REACTION'
+      },
+      board: {
+        3: 2,
+        4: 3,
+        5: 4
       }
     },
     combos: {

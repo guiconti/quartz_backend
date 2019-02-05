@@ -1,10 +1,10 @@
 /**
  * Module to generate a new card pile
- * @module utils/generateCardPile
+ * @module utils/generateCardsPile
  */
 
 const constants = require('./constants');
 
 module.exports = () => {
-  return [];
+  return constants.values.cards.list;
 };
