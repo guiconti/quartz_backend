@@ -110,7 +110,8 @@ module.exports = {
           description: `Mine three Crystals, all at once. If any of them are Obsidian, return them to the Mine
           Bag. You may keep any or all of the Crystals and place them in your Mine Cart.`,
           type: 'ACTION',
-          value: 10
+          value: 10,
+          amount: 10
         },
         {
           name: 'Eureka!',
@@ -120,7 +121,8 @@ module.exports = {
           replaced, are returned to the Mine Bag. Only the new Crystal is kept, and Obsidian may
           not be replaced in this way.`,
           type: 'ACTION',
-          value: 3
+          value: 3,
+          amount: 3
         },
         {
           name: 'Come closer',
@@ -128,7 +130,8 @@ module.exports = {
           description: `Trade one Crystal from your Mine Cart with one Crystal from the Mine Cart of a dwarf
           who is still inside the Mine. Trading Obsidian in this way is not allowed.`,
           type: 'ACTION',
-          value: 3
+          value: 3,
+          amount: 3
         },
         {
           name: 'Out of my waaaay',
@@ -136,7 +139,8 @@ module.exports = {
           description: `All other dwarves still in the mine must discard one random valuable Crystal (not
             Obsidian) from their Mine Carts. The discarded Crystals are returned to the Mine Bag.`,
           type: 'ACTION',
-          value: 3
+          value: 3,
+          amount: 3
         },
         {
           name: 'Crystal? What crystal?',
@@ -146,7 +150,8 @@ module.exports = {
           Action Card effects and Accidents. At the end of the day, return any Crystals on this card
           to your Mine Cart and discard this card.`,
           type: 'ACTION',
-          value: 3
+          value: 3,
+          amount: 3
         },
         {
           name: 'Give me a hand here',
@@ -156,7 +161,8 @@ module.exports = {
           if it is Obsidian. If both Crystals mined are Obsidian, the miner takes one, and the other is
           returned to the Mine Bag.`,
           type: 'ACTION',
-          value: 8
+          value: 8,
+          amount: 8
         },
         {
           name: 'These don\'t belong to you',
@@ -164,7 +170,8 @@ module.exports = {
           description: `Steal two valuable Crystals from another dwarf’s Mine Cart. Obsidian cannot be stolen
           in this way.`,
           type: 'ACTION',
-          value: 8
+          value: 8,
+          amount: 8
         },
         {
           name: 'This isn\'t mine',
@@ -173,7 +180,8 @@ module.exports = {
           If the dwarf receiving the Obsidian already has an Obsidian in their Mine Cart, they will
           suffer an Accident immediately.`,
           type: 'ACTION',
-          value: 8
+          value: 8,
+          amount: 8
         },
         {
           name: 'Not mine either!',
@@ -183,7 +191,8 @@ module.exports = {
           Obsidian cannot be sent back to the dwarf who gave it to you.) If no other dwarves are
           available, the Obsidian is returned to the Mine Bag.`,
           type: 'REACTION',
-          value: 3
+          value: 3,
+          amount: 3
         },
         {
           name: 'Thievery? Unacceptable!',
@@ -192,7 +201,8 @@ module.exports = {
           Action Card, you may play this card to block that action. Instead, take one Crystal from
           their Mine Cart.`,
           type: 'REACTION',
-          value: 3
+          value: 3,
+          amount: 3
         },
         {
           name: 'Nope. I am on a break',
@@ -200,7 +210,8 @@ module.exports = {
           description: `Play this card to prevent another dwarf from forcing you to mine two Crystals with the
           “Gimme A Hand Here” Action Card. `,
           type: 'REACTION',
-          value: 3
+          value: 3,
+          amount: 3
         },
       ],
       types: {
@@ -211,7 +222,8 @@ module.exports = {
         3: 2,
         4: 3,
         5: 4
-      }
+      },
+      AMOUNT_PER_PLAYER: 5
     },
     combos: {
       types: {

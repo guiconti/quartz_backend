@@ -80,7 +80,7 @@ module.exports = (req, res) => {
 
       let playersData = [];
       room.users.forEach(user => {
-        playersData.push(generatePlayer(user._id));
+        playersData.push(generatePlayer(user._id, cardsPile));
       });
       playersData[Math.floor(Math.random() * (playersData.length - 1))].currentTurn = true;
 

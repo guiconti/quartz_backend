@@ -8,9 +8,12 @@ const constants = require('./constants');
 module.exports = (cardsPile, playersAmount) => {
   let cardsBoard = [];
   for (let i = 0; i < playersAmount; i++) {
-    let newBoardCardIndex = Math.floor(Math.round() * (cardsPile.length - 1));
-    cardsBoard.push(cardsPile(newBoardCardIndex));
-    cardsPile.splice(newBoardCardIndex, 1);
+    let shuffleCards = cardsPile.reduce((previousValue, currentValue, currentIndex) => {
+      return previousValue + String(currentIndex).repeat(currentValue.amount);
+    }, '');
+    let newBoardCardIndex = shuffleCards[Math.floor(Math.random() * (shuffleCards.length - 1))];
+    cardsBoard.push(JSON.parse(JSON.stringify(cardsPile[newBoardCardIndex])));
+    cardsPile[newBoardCardIndex].amount--;
   }
   return cardsBoard;
 };

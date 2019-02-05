@@ -5,7 +5,16 @@
 
 const constants = require('./constants');
 
-module.exports = userId => {
+module.exports = (userId, cardsPile) => {
+  let playerCards = [];
+  for (let i = 0; i < constants.values.cards.AMOUNT_PER_PLAYER; i++) {
+    let shuffleCards = cardsPile.reduce((previousValue, currentValue, currentIndex) => {
+      return previousValue + String(currentIndex).repeat(currentValue.amount);
+    }, '');
+    let newPlayerCardIndex = shuffleCards[Math.floor(Math.random() * (shuffleCards.length - 1))];
+    playerCards.push(JSON.parse(JSON.stringify(cardsPile[newPlayerCardIndex])));
+    cardsPile[newPlayerCardIndex].amount--;
+  }
   return {
     user: userId,
     crystals: [
@@ -37,6 +46,7 @@ module.exports = userId => {
         name: constants.values.crystals.AUTUNITA.name,
         value: constants.values.crystals.AUTUNITA.value
       }
-    ]
+    ],
+    cards: playerCards
   };
 };

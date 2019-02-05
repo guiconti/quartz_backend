@@ -29,6 +29,11 @@ module.exports = mongoose => {
       type: Number,
       required: true,
       default: 0
+    },
+    amount: {
+      type: Number,
+      required: true,
+      default: 0
     }
   });
 };
