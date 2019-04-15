@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: [`http://${process.env.CORS_ORIGIN}`, `https://${process.env.CORS_ORIGIN}`],
+    origin: [`http://${process.env.FRONTEND_HOST}`, `https://${process.env.FRONTEND_HOST}`],
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
     credentials: true
   })
