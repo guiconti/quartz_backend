@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [process.env.CORS_ORIGIN],
+    origin: [`http://${process.env.CORS_ORIGIN}`, `https://${process.env.CORS_ORIGIN}`],
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
     credentials: true
   })
@@ -24,7 +24,8 @@ app.use(logger.errorHandler());
 let http;
 
 const setupSSL = require('./setupSSL');
-const SSL = setupSSL();
+// const SSL = setupSSL();
+const SSL = null;
 
 if (SSL) {
   console.log('SSL Initialized');

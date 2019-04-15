@@ -2,15 +2,16 @@
   "development": {
     "NODE_ENV": "development",
     "PORT": 3100,
-    "CORS_ORIGIN": "http://localhost:3330"
+    "FRONTEND_HOST": "localhost"
   },
   "pilot": {
     "NODE_ENV": "development",
     "PORT": 3100,
-    "CORS_ORIGIN": "http://quartz.tiimus.com"
+    "FRONTEND_HOST": "quartz.tiimus.com"
   },
   "production": {
     "NODE_ENV": "production",
-    "PORT": 3100
+    "PORT": 3100,
+    "FRONTEND_HOST": "quartz.tiimus.com"
   }
 }
