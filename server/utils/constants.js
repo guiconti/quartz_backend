@@ -25,6 +25,7 @@ module.exports = {
       USER_NOT_PLAYING: 'This user is not a member of this game.',
       NOT_USERS_TURN: 'This is not the user\'s turn.',
       NOT_OWNER: 'You do not own this room.',
+      USER_DONT_HAVE_CARD: 'This user does not have this card.',
       SELLING_NOT_AVAILABLE: 'Selling is not available at the moment.',
       ALREADY_SOLD: 'You already sold your crystals.',
       INVALID_CRYSTALS_TO_KEEP: 'Crystals to keep sent are invalid.',
