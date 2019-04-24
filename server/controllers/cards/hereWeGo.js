@@ -1,4 +1,5 @@
 const io = require('../../utils/io');
+const discardCard = require('../../utils/discardCard');
 const constants = require('../../utils/constants');
 
 module.exports = (game, playerIndex, cardIndex) => {
@@ -23,6 +24,7 @@ module.exports = (game, playerIndex, cardIndex) => {
       },
       crystals: crystalsPicked
     };
+    discardCard(game, playerIndex, cardIndex);
     game.save((err, savedGame) => {
       if (err) {
         return reject(err);
