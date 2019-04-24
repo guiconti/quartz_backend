@@ -8,6 +8,7 @@ module.exports = {
       USER_LOGGED_OUT: 'User logged out.',
       MESSAGE_SENT: 'Message sent.',
       CRYSTAL_PICKED: 'Crystal picked.',
+      CARD_USED: 'Card used.',
       MINE_CLOSED: 'Mine closed.'
     },
     error: {
@@ -55,7 +56,8 @@ module.exports = {
       JOIN_GAME: 'joinGame',
       LEAVE_GAME: 'leaveGame',
       UPDATE_GAME: 'updateGame',
-      CRYSTAL_PICKED: 'crystalPicked'
+      CRYSTAL_PICKED: 'crystalPicked',
+      HERE_WE_GO: 'hereWeGo'
     }
   },
   values: {

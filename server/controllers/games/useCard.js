@@ -20,6 +20,9 @@ const isRoundOver = require('../../utils/isRoundOver');
 const nextRound = require('../../utils/nextRound');
 const constants = require('../../utils/constants');
 
+const retrieveControllers = require('../../utils/retrieveControllers');
+const cards = retrieveControllers('cards');
+
 /**
  * Retrieve a crystal for user
  *
@@ -47,11 +50,19 @@ module.exports = (req, res) => {
       msg: constants.messages.error.USER_DONT_HAVE_CARD
     });
   }
-
-  return res.status(200).json({
-    msg: 'Nice'
-  });
   
+  return cards[action](game, playerIndex, cardIndex)
+    .then(() => {
+      return res.status(200).json({
+        msg: constants.messages.info.CRYSTAL_PICKED
+      });
+    })
+    .catch(err => {
+      return res.status(500).json({
+        msg: constants.messages.error.UNEXPECTED_DB
+      });
+    });
+
   if (didPlayerExploded(game, playerIndex)) {
     game = playerExploded(game, playerIndex);
     if (isRoundOver(game)) {
