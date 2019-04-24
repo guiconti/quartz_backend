@@ -111,7 +111,8 @@ module.exports = {
           Bag. You may keep any or all of the Crystals and place them in your Mine Cart.`,
           type: 'ACTION',
           value: 10,
-          amount: 10
+          amount: 10,
+          image: 'https://i.imgur.com/u5GksXQ.jpg'
         },
         {
           name: 'Eureka!',
@@ -122,7 +123,8 @@ module.exports = {
           not be replaced in this way.`,
           type: 'ACTION',
           value: 3,
-          amount: 3
+          amount: 3,
+          image: 'https://i.imgur.com/VmdgRIB.jpg'
         },
         {
           name: 'Come closer',
@@ -131,7 +133,8 @@ module.exports = {
           who is still inside the Mine. Trading Obsidian in this way is not allowed.`,
           type: 'ACTION',
           value: 3,
-          amount: 3
+          amount: 3,
+          image: 'https://i.imgur.com/ztEm7hf.jpg'
         },
         {
           name: 'Out of my waaaay',
@@ -140,7 +143,8 @@ module.exports = {
             Obsidian) from their Mine Carts. The discarded Crystals are returned to the Mine Bag.`,
           type: 'ACTION',
           value: 3,
-          amount: 3
+          amount: 3,
+          image: 'https://i.imgur.com/H7vF73z.jpg'
         },
         {
           name: 'Crystal? What crystal?',
@@ -151,7 +155,8 @@ module.exports = {
           to your Mine Cart and discard this card.`,
           type: 'ACTION',
           value: 3,
-          amount: 3
+          amount: 3,
+          image: 'https://i.imgur.com/L5bPIm9.jpg'
         },
         {
           name: 'Give me a hand here',
@@ -162,7 +167,8 @@ module.exports = {
           returned to the Mine Bag.`,
           type: 'ACTION',
           value: 8,
-          amount: 8
+          amount: 8,
+          image: 'https://i.imgur.com/xtOKc6d.jpg'
         },
         {
           name: 'These don\'t belong to you',
@@ -171,7 +177,8 @@ module.exports = {
           in this way.`,
           type: 'ACTION',
           value: 8,
-          amount: 8
+          amount: 8,
+          image: 'https://i.imgur.com/xM73SOL.jpg'
         },
         {
           name: 'This isn\'t mine',
@@ -181,7 +188,8 @@ module.exports = {
           suffer an Accident immediately.`,
           type: 'ACTION',
           value: 8,
-          amount: 8
+          amount: 8,
+          image: 'https://i.imgur.com/BGhoG0d.jpg'
         },
         {
           name: 'Not mine either!',
@@ -192,7 +200,8 @@ module.exports = {
           available, the Obsidian is returned to the Mine Bag.`,
           type: 'REACTION',
           value: 3,
-          amount: 3
+          amount: 3,
+          image: 'https://i.imgur.com/SaW1DEY.jpg'
         },
         {
           name: 'Thievery? Unacceptable!',
@@ -202,7 +211,8 @@ module.exports = {
           their Mine Cart.`,
           type: 'REACTION',
           value: 3,
-          amount: 3
+          amount: 3,
+          image: 'https://i.imgur.com/ttkH9cK.jpg'
         },
         {
           name: 'Nope. I am on a break',
@@ -211,7 +221,8 @@ module.exports = {
           “Gimme A Hand Here” Action Card. `,
           type: 'REACTION',
           value: 3,
-          amount: 3
+          amount: 3,
+          image: 'https://i.imgur.com/5RJRbGF.jpg'
         },
       ],
       types: {

@@ -39,6 +39,11 @@ module.exports = mongoose => {
       type: Number,
       required: true,
       default: 0
+    },
+    image: {
+      type: String,
+      required: true,
+      default: ''
     }
   });
 };
