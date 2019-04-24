@@ -12,6 +12,11 @@ module.exports = mongoose => {
       required: true,
       default: ''
     },
+    image: {
+      type: String,
+      required: true,
+      default: ''
+    },
     description: { 
       type: String, 
       required: true,
