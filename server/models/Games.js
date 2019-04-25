@@ -11,6 +11,11 @@ module.exports = mongoose => {
       required: false,
       default: false
     },
+    cache: {
+      type: Array,
+      required: false,
+      default: []
+    },
     round: {
       type: Number,
       required: false,

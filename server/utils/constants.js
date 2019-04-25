@@ -31,6 +31,7 @@ module.exports = {
       ALREADY_SOLD: 'You already sold your crystals.',
       INVALID_CRYSTALS_TO_KEEP: 'Crystals to keep sent are invalid.',
       INVALID_COMBO: 'Combo sent is invalid.',
+      CRYSTALS_SENT_INVALID: 'Crystal sent are invalid.',
       ROOM_NOT_ENABLE: 'This room is not enable to start the game.',
       ROOM_NOT_FOUND: 'This room id does not correspond to a valid room.',
       INACTIVE_ROOM: 'This room is not accepting new users anymore.',
@@ -57,7 +58,9 @@ module.exports = {
       LEAVE_GAME: 'leaveGame',
       UPDATE_GAME: 'updateGame',
       CRYSTAL_PICKED: 'crystalPicked',
-      HERE_WE_GO: 'hereWeGo'
+      HERE_WE_GO: 'hereWeGo',
+      EUREKA: 'eureka',
+      EUREKA_ANSWER: 'eureka_answer'
     }
   },
   values: {

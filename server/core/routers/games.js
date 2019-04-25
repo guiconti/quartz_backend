@@ -16,4 +16,7 @@ router.patch('/:gameId/close_mine', gameMiddleware, controllers.closeMine);
 router.patch('/:gameId/sell', gameMiddleware, controllers.sellCrystals);
 router.patch('/:gameId/use_card', gameMiddleware, controllers.useCard);
 
+//  Cards
+router.use('/:gameId/cards/', gameMiddleware, require('./cards'));
+
 module.exports = router;

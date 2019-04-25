@@ -8,6 +8,11 @@ module.exports = mongoose => {
     },
     crystals: [ mongoose.Schema.Crystals ],
     cards: [ mongoose.Schema.Cards ],
+    hasToAnswerCard: {
+      type: String,
+      required: false,
+      default: ''
+    },
     hasAnIdiotBook: {
       type: Boolean,
       required: false,

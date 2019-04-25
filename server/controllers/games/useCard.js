@@ -40,7 +40,7 @@ module.exports = (req, res) => {
     });
   }
 
-  const cardIndex = game.players[playerIndex].cards.findIndex((card, index) => {
+  const cardIndex = game.players[playerIndex].cards.findIndex(card => {
     return card.action === action;
   });
 
@@ -53,7 +53,7 @@ module.exports = (req, res) => {
   return cards[action](game, playerIndex, cardIndex)
     .then(() => {
       return res.status(200).json({
-        msg: constants.messages.info.CRYSTAL_PICKED
+        msg: constants.messages.info.CARD_USED
       });
     })
     .catch(err => {
