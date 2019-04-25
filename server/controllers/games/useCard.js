@@ -32,7 +32,7 @@ const cards = retrieveControllers('cards');
  */
 module.exports = (req, res) => {
   let { game, playerIndex } = req;
-  let { action } = req.body;
+  let { action, info } = req.body;
 
   if (!game.players[playerIndex].currentTurn) {
     return res.status(400).json({
@@ -50,13 +50,19 @@ module.exports = (req, res) => {
     });
   }
   
-  return cards[action](game, playerIndex, cardIndex)
+  return cards[action](game, playerIndex, cardIndex, info)
     .then(() => {
       return res.status(200).json({
         msg: constants.messages.info.CARD_USED
       });
     })
     .catch(err => {
+      if (err.status !== undefined) {
+        console.log('err :', err);
+        return res.status(err.status).json({
+          msg: err.msg
+        });
+      }
       return res.status(500).json({
         msg: constants.messages.error.UNEXPECTED_DB
       });

@@ -21,6 +21,7 @@ module.exports = {
       INVALID_PARENT: 'Parent id sent is not valid.',
       INVALID_CONTENT: 'Message\'s content is not valid.',
       INVALID_PLAYERS: 'Players sent are not valid.',
+      INVALID_TARGET: 'Target id sent is not valid.',
       INVALID_GAME: 'Game id sent is not valid.',
       INVALID_SELLING: 'Selling data sent is not valid.',
       USER_NOT_PLAYING: 'This user is not a member of this game.',
@@ -60,7 +61,8 @@ module.exports = {
       CRYSTAL_PICKED: 'crystalPicked',
       HERE_WE_GO: 'hereWeGo',
       EUREKA: 'eureka',
-      EUREKA_ANSWER: 'eureka_answer'
+      EUREKA_ANSWER: 'eurekaAnswer',
+      COME_CLOSER: 'comeCloser'
     }
   },
   values: {
