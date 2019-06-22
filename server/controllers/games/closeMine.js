@@ -29,7 +29,7 @@ const constants = require('../../utils/constants');
 module.exports = (req, res) => {
   let { game, playerIndex } = req;
 
-  if (!game.players[playerIndex].currentTurn) {
+  if (!game.players[playerIndex].currentTurn || game.waitingPlayerForDefensiveResponse !== '') {
     return res.status(400).json({
       msg: constants.messages.error.NOT_USERS_TURN
     });

@@ -24,5 +24,11 @@ exports.initialize = server => {
     socket.on(constants.sockets.types.LEAVE_GAME, gameId => {
       socket.leave(gameId);
     });
+    socket.on(constants.sockets.types.JOIN_PLAYER_ROOM, playerId => {
+      socket.join(playerId);
+    });
+    socket.on(constants.sockets.types.LEAVE_PLAYER_ROOM, playerId => {
+      socket.leave(playerId);
+    });
   });
 };

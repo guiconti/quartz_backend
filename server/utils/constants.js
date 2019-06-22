@@ -58,6 +58,8 @@ module.exports = {
       START_GAME: 'startGame',
       JOIN_GAME: 'joinGame',
       LEAVE_GAME: 'leaveGame',
+      JOIN_PLAYER_ROOM: 'joinPlayerRoom',
+      LEAVE_PLAYER_ROOM: 'leavePlayerRoom',
       UPDATE_GAME: 'updateGame',
       CRYSTAL_PICKED: 'crystalPicked',
       HERE_WE_GO: 'hereWeGo',
@@ -67,7 +69,7 @@ module.exports = {
       OUT_OF_MY_WAY: 'outOfMyWay',
       CRYSTAL_WHAT_CRYSTAL: 'crystalWhatCrystal',
       THIS_ISNT_MINE: 'thisIsntMine',
-      THIS_ISNT_MINE_REACTION: 'thisIsntMineReaction',
+      THIS_ISNT_MINE_EITHER: 'thisIsntMineEither',
     }
   },
   values: {

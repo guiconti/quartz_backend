@@ -28,9 +28,9 @@ const cards = retrieveControllers('cards');
 module.exports = (req, res) => {
   let { game, playerIndex } = req;
   let { action, info } = req.body;
-
+  
   if (!game.players[playerIndex].currentTurn && 
-    game.waitingPlayerForDefensiveResponse !== game.players[playerIndex]._id
+    game.waitingPlayerForDefensiveResponse !== String(game.players[playerIndex]._id)
   ) {
     return res.status(400).json({
       msg: constants.messages.error.NOT_USERS_TURN
@@ -60,6 +60,7 @@ module.exports = (req, res) => {
           msg: err.msg
         });
       }
+      console.log(err);
       return res.status(500).json({
         msg: constants.messages.error.UNEXPECTED_DB
       });

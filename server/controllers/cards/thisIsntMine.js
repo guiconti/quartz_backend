@@ -40,8 +40,8 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       }
     }
 
+    game.players[playerIndex].crystals[game.players[playerIndex].crystals.length - 1].amount--;
     discardCard(game, playerIndex, cardIndex);
-
     if (!targetHaveCounter) {
       game.players[targetedPlayerIndex].crystals[game.players[targetedPlayerIndex].crystals.length - 1].amount++;
       if (didPlayerExploded(game, targetedPlayerIndex)) {
@@ -50,7 +50,7 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       const message = {
         player: {
           username: game.players[playerIndex].user.username,
-          _id: game.players[playerIndex]._id
+          _id: game.players[playerIndex].user._id
         },
         target: {
           username: game.players[targetedPlayerIndex].user.username,
@@ -58,24 +58,22 @@ module.exports = (game, playerIndex, cardIndex, info) => {
         }
       };
       game = nextTurn(game, playerIndex);
-      game.save((err, savedGame) => {
+      return game.save((err, savedGame) => {
           if (err) {
             return reject(err);
           }
-          
           io.emit(String(savedGame._id), constants.sockets.types.THIS_ISNT_MINE, message);
           io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
           return resolve();
         });
     }
-
-    game.players[targetedPlayerIndex].hasToAnswerCard = constants.sockets.types.THIS_ISNT_MINE;
+    game.players[targetedPlayerIndex].hasToAnswerCard = constants.values.cards.THIS_ISNT_MINE_REACTION;
     game.waitingPlayerForDefensiveResponse = game.players[targetedPlayerIndex]._id;
-    game.cache[0] = playerIndex;
+    game.cache = [0];
     const message = {
       player: {
         username: game.players[playerIndex].user.username,
-        _id: game.players[playerIndex]._id
+        _id: game.players[playerIndex].user._id
       },
       target: {
         username: game.players[targetedPlayerIndex].user.username,
@@ -86,8 +84,7 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       if (err) {
         return reject(err);
       }
-      
-      io.emit(String(game.players[targetedPlayerIndex]._id), constants.sockets.types.THIS_ISNT_MINE_REACTION, message);
+      io.emit(String(game.players[targetedPlayerIndex]._id), constants.sockets.types.THIS_ISNT_MINE_EITHER, message);
       return resolve();
     });
   });
