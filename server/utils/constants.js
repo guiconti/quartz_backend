@@ -62,7 +62,8 @@ module.exports = {
       HERE_WE_GO: 'hereWeGo',
       EUREKA: 'eureka',
       EUREKA_ANSWER: 'eurekaAnswer',
-      COME_CLOSER: 'comeCloser'
+      COME_CLOSER: 'comeCloser',
+      OUT_OF_MY_WAY: 'outOfMyWay',
     }
   },
   values: {
@@ -242,7 +243,8 @@ module.exports = {
         4: 3,
         5: 4
       },
-      AMOUNT_PER_PLAYER: 5
+      AMOUNT_PER_PLAYER: 5,
+      EUREKA_CRYSTALS_AMOUNT: 7,
     },
     combos: {
       types: {

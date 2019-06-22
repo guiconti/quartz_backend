@@ -195,7 +195,7 @@ const constants = require('../../utils/constants');
 /**
  * Retrieve a game by its id
  *
- * @param {string} req.params.gameId - Game id to retrieve info 
+ * @param {string} req.params.gameId - Game id to retrieve info
  * @return {object} - Returns the game in a json format
  * @throws {object} - Returns a msg that indicates a failure
  *
@@ -209,8 +209,7 @@ module.exports = (req, res) => {
     });
   }
 
-  database.Games
-    .findById(gameId)
+  database.Games.findById(gameId)
     .populate({
       path: 'players.user',
       select: 'username'
@@ -229,5 +228,5 @@ module.exports = (req, res) => {
       return res.status(200).json({
         msg: game
       });
-    })
+    });
 };
