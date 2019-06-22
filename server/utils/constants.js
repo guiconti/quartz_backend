@@ -22,6 +22,7 @@ module.exports = {
       INVALID_CONTENT: 'Message\'s content is not valid.',
       INVALID_PLAYERS: 'Players sent are not valid.',
       INVALID_TARGET: 'Target id sent is not valid.',
+      INVALID_CRYSTAL: 'Crystal sent is not valid.',
       INVALID_GAME: 'Game id sent is not valid.',
       INVALID_SELLING: 'Selling data sent is not valid.',
       USER_NOT_PLAYING: 'This user is not a member of this game.',
@@ -64,6 +65,7 @@ module.exports = {
       EUREKA_ANSWER: 'eurekaAnswer',
       COME_CLOSER: 'comeCloser',
       OUT_OF_MY_WAY: 'outOfMyWay',
+      CRYSTAL_WHAT_CRYSTAL: 'crystalWhatCrystal',
     }
   },
   values: {

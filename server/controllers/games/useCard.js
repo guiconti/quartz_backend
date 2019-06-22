@@ -12,11 +12,6 @@
     { "msg": "Database connection error." }
   *
  */
-const io = require('../../utils/io');
-const nextTurn = require('../../utils/nextTurn');
-const didPlayerExploded = require('../../utils/didPlayerExploded');
-const playerExploded = require('../../utils/playerExploded');
-const isRoundOver = require('../../utils/isRoundOver');
 const constants = require('../../utils/constants');
 
 const retrieveControllers = require('../../utils/retrieveControllers');

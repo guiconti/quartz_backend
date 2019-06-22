@@ -13,6 +13,11 @@ module.exports = mongoose => {
       required: false,
       default: ''
     },
+    keptCrystal: {
+      type: String,
+      required: false,
+      default: ''
+    },
     hasAnIdiotBook: {
       type: Boolean,
       required: false,

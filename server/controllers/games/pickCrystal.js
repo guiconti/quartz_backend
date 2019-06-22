@@ -17,7 +17,7 @@ const nextTurn = require('../../utils/nextTurn');
 const didPlayerExploded = require('../../utils/didPlayerExploded');
 const playerExploded = require('../../utils/playerExploded');
 const isRoundOver = require('../../utils/isRoundOver');
-const nextRound = require('../../utils/nextRound');
+const startSelling = require('../../utils/startSelling');
 const constants = require('../../utils/constants');
 
 /**
@@ -53,7 +53,7 @@ module.exports = (req, res) => {
   if (didPlayerExploded(game, playerIndex)) {
     game = playerExploded(game, playerIndex);
     if (isRoundOver(game)) {
-      game.isSelling = true;
+      startSelling(game);
     } else {
       game = nextTurn(game, playerIndex);
     }
