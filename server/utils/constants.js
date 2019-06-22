@@ -66,6 +66,8 @@ module.exports = {
       COME_CLOSER: 'comeCloser',
       OUT_OF_MY_WAY: 'outOfMyWay',
       CRYSTAL_WHAT_CRYSTAL: 'crystalWhatCrystal',
+      THIS_ISNT_MINE: 'thisIsntMine',
+      THIS_ISNT_MINE_REACTION: 'thisIsntMineReaction',
     }
   },
   values: {
@@ -247,6 +249,7 @@ module.exports = {
       },
       AMOUNT_PER_PLAYER: 5,
       EUREKA_CRYSTALS_AMOUNT: 7,
+      THIS_ISNT_MINE_REACTION: 'notMineEither',
     },
     combos: {
       types: {

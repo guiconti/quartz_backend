@@ -29,7 +29,9 @@ module.exports = (req, res) => {
   let { game, playerIndex } = req;
   let { action, info } = req.body;
 
-  if (!game.players[playerIndex].currentTurn) {
+  if (!game.players[playerIndex].currentTurn && 
+    game.waitingPlayerForDefensiveResponse !== game.players[playerIndex]._id
+  ) {
     return res.status(400).json({
       msg: constants.messages.error.NOT_USERS_TURN
     });

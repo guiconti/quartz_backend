@@ -12,7 +12,9 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       });
     }
 
-    let targetedPlayerIndex = game.players.findIndex(player => String(player.user._id) === info.from);
+    let targetedPlayerIndex = game.players.findIndex(
+      player => String(player.user._id) === info.from && player.isRoundActive
+    );
 
     if (targetedPlayerIndex === -1) {
       return reject({

@@ -6,7 +6,7 @@ module.exports = (game, playerIndex, cardIndex) => {
   return new Promise((resolve, reject) => {
     let crystalsPicked = [];
     let crystalsPickedAux = [];
-    for (let i = 0; i < constants.values.EUREKA_CRYSTALS_AMOUNT; i++) {
+    for (let i = 0; i < constants.values.cards.EUREKA_CRYSTALS_AMOUNT; i++) {
       let crystalPicker = '';
       for (let j = 0; j < game.cave.crystals.length; j++){
         crystalPicker += String(j).repeat(game.cave.crystals[j].amount 
