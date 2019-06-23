@@ -73,6 +73,8 @@ module.exports = {
       THIS_ISNT_MINE_EITHER: 'thisIsntMineEither',
       THESE_DONT_BELONG_TO_YOU: 'theseDontBelongToYou',
       THIEVERY_UNACCEPTABLE: 'thieveryUnacceptable',
+      GIVE_ME_A_HAND_HERE: 'giveMeAHandHere',
+      GIVE_ME_A_HAND_HERE_ANSWER: 'giveMeAHandHereAnswer',
     }
   },
   values: {
@@ -256,8 +258,12 @@ module.exports = {
       EUREKA_CRYSTALS_AMOUNT: 7,
       THESE_DONT_BELONG_TO_YOU_CRYSTALS_AMOUNT: 2,
       THESE_DONT_BELONG_TO_YOU_REACTION_CRYSTALS_AMOUNT: 1,
+      GIVE_ME_A_HAND_HERE_CRYSTALS_AMOUNT: 2,
+      GIVE_ME_A_HAND_HERE_TAKE_CRYSTALS_AMOUNT: 1,
+      GIVE_ME_A_HAND_HERE_GIVE_CRYSTALS_AMOUNT: 2,
       THIS_ISNT_MINE_REACTION: 'notMineEither',
       THESE_DONT_BELONG_TO_YOU_REACTION: 'thieveryUnacceptable',
+      GIVE_ME_A_HAND_HERE_REACTION: 'nopeIAmOnABreak',
     },
     combos: {
       types: {
