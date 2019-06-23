@@ -18,6 +18,12 @@ module.exports = game => {
   });
   if (game.round >= constants.values.MAX_ROUNDS) {
     game.active = false;
+    for (let i = 0; i < game.players.length; i++) {
+      if (game.players[i].hasAnIdiotBook) {
+        game.players[i].hasAnIdiotBook = false;
+        game.players[i].money += constants.values.IDIOT_BOOK_VALUE;
+      }
+    }
     return game;
   }
   game.players[Math.floor(Math.random() * (game.players.length - 1))].currentTurn = true;

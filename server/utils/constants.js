@@ -266,6 +266,7 @@ module.exports = {
       THESE_DONT_BELONG_TO_YOU_REACTION: 'thieveryUnacceptable',
       GIVE_ME_A_HAND_HERE_REACTION: 'nopeIAmOnABreak',
     },
+    IDIOT_BOOK_VALUE: 3,
     combos: {
       types: {
         NO_COMBO: -1,
