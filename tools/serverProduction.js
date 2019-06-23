@@ -7,10 +7,9 @@ const express = require('express');
 const router = require('../server/core/router.js');
 const logger = require('./logger');
 const cors = require('cors');
-const app = express();
+const app = express(); 
 const cookieParser = require('cookie-parser');
 
-app.use(cookieParser());
 app.use(
   cors({
     origin: [`http://${process.env.FRONTEND_HOST}`, `https://${process.env.FRONTEND_HOST}`],
@@ -18,6 +17,7 @@ app.use(
     credentials: true
   })
 );
+app.use(cookieParser());
 app.use('/', router);
 app.use(logger.errorHandler());
 
@@ -36,4 +36,4 @@ if (SSL) {
 
 require('../server/utils/io').initialize(http);
 
-module.exports = app;
+module.exports = http;
