@@ -71,7 +71,7 @@ module.exports = (game, playerIndex, cardIndex, info) => {
     }
     game.players[targetedPlayerIndex].hasToAnswerCard = constants.values.cards.THIS_ISNT_MINE_REACTION;
     game.waitingPlayerForDefensiveResponse = game.players[targetedPlayerIndex]._id;
-    game.cache = [0];
+    game.cache = [playerIndex];
     const message = {
       player: {
         username: game.players[playerIndex].user.username,

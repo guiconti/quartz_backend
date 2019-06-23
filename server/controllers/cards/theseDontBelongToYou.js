@@ -32,6 +32,16 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       });
     }
 
+    for (let i = 0; i < info.pickedCrystals.length; i++) {
+      if (info.pickedCrystals[i] < 0
+        || game.players[targetedPlayerIndex].crystals[i].amount < info.pickedCrystals[i]) {
+        return reject({
+          status: 400,
+          msg: constants.messages.error.INVALID_CRYSTAL
+        }); 
+      }
+    }
+
     let targetHaveCounter = false;
     for (let i = 0; i < game.players[targetedPlayerIndex].cards.length; i++) {
       if (game.players[targetedPlayerIndex].cards[i].action === constants.values.cards.THESE_DONT_BELONG_TO_YOU_REACTION) {
@@ -43,13 +53,6 @@ module.exports = (game, playerIndex, cardIndex, info) => {
     if (!targetHaveCounter) {
       let crystalsTook = '';
       for (let i = 0; i < info.pickedCrystals.length; i++) {
-        if (info.pickedCrystals[i] < 0
-          || game.players[targetedPlayerIndex].crystals[i].amount < info.pickedCrystals[i]) {
-          return reject({
-            status: 400,
-            msg: constants.messages.error.INVALID_CRYSTAL
-          }); 
-        }
         game.players[targetedPlayerIndex].crystals[i].amount -= info.pickedCrystals[i];
         game.players[playerIndex].crystals[i].amount += info.pickedCrystals[i];
         if (info.pickedCrystals[i] > 0) {
@@ -65,11 +68,12 @@ module.exports = (game, playerIndex, cardIndex, info) => {
           username: game.players[targetedPlayerIndex].user.username,
           _id: game.players[targetedPlayerIndex]._id 
         },
-        took: crystalsTook
+        took: crystalsTook,
+        counter: false,
       };
       discardCard(game, playerIndex, cardIndex);
       game = nextTurn(game, playerIndex);
-      game.save((err, savedGame) => {
+      return game.save((err, savedGame) => {
         if (err) {
           return reject(err);
         }
@@ -80,58 +84,30 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       });
     }
 
-    return resolve();
-
-    let givenCrystalIndex = game.players[playerIndex].crystals.findIndex(crystal => { 
-      return crystal.name === info.given && crystal.amount > 0; 
-    });
-
-    if (givenCrystalIndex === -1 || info.given === constants.values.crystals.AUTUNITA.name) {
-      return reject({
-        status: 400,
-        msg: constants.messages.error.INVALID_CRYSTALS_TO_KEEP
-      });
-    }
-
-    let takenCrystalIndex = game.players[targetedPlayerIndex].crystals.findIndex(crystal => { 
-      return crystal.name === info.taken && crystal.amount > 0; 
-    });
-
-    if (takenCrystalIndex === -1 || info.taken === constants.values.crystals.AUTUNITA.name) {
-      return reject({
-        status: 400,
-        msg: constants.messages.error.INVALID_CRYSTALS_TO_KEEP
-      });
-    }
-
-    game.players[playerIndex].crystals[givenCrystalIndex].amount--;
-    game.players[playerIndex].crystals[takenCrystalIndex].amount++;
-    game.players[targetedPlayerIndex].crystals[givenCrystalIndex].amount++;
-    game.players[targetedPlayerIndex].crystals[takenCrystalIndex].amount--;
-
-    const message = {
-      player: {
-        username: game.players[playerIndex].user.username,
-        _id: game.players[playerIndex]._id
-      },
-      from: {
-        username: game.players[targetedPlayerIndex].user.username,
-        _id: game.players[targetedPlayerIndex]._id 
-      },
-      crystals: {
-        given: info.given,
-        taken: info.taken
-      }
-    };
     discardCard(game, playerIndex, cardIndex);
-    game = nextTurn(game, playerIndex);
-    game.save((err, savedGame) => {
+    let crystalsTook = '';
+    for (let i = 0; i < info.pickedCrystals.length; i++) {
+      if (info.pickedCrystals[i] > 0) {
+        crystalsTook += `${info.pickedCrystals[i]} - ${game.players[playerIndex].crystals[i].name} `
+      } 
+    }
+    game.players[targetedPlayerIndex].hasToAnswerCard = constants.values.cards.THESE_DONT_BELONG_TO_YOU_REACTION;
+    game.waitingPlayerForDefensiveResponse = game.players[targetedPlayerIndex]._id;
+    game.cache = [playerIndex];
+    game.cache = game.cache.concat(info.pickedCrystals);
+    const message = {
+      attacker: {
+        username: game.players[playerIndex].user.username,
+        _id: game.players[playerIndex].user._id
+      },
+      crystalsTook
+    };
+    return game.save((err, savedGame) => {
       if (err) {
         return reject(err);
       }
       
-      io.emit(String(savedGame._id), constants.sockets.types.COME_CLOSER, message);
-      io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
+      io.emit(String(game.players[targetedPlayerIndex]._id), constants.sockets.types.THIEVERY_UNACCEPTABLE, message);
       return resolve();
     });
   });
