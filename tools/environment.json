@@ -9,12 +9,12 @@
     "NODE_ENV": "development",
     "PORT": 3100,
     "FRONTEND_HOST": "quartz.tiimus.com",
-    "COOKIE_DOMAIN": ".quartz.tiimus.com"
+    "COOKIE_DOMAIN": ".tiimus.com"
   },
   "production": {
     "NODE_ENV": "production",
     "PORT": 3100,
     "FRONTEND_HOST": "quartz.tiimus.com",
-    "COOKIE_DOMAIN": ".quartz.tiimus.com"
+    "COOKIE_DOMAIN": ".tiimus.com"
   }
 }
