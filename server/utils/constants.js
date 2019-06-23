@@ -75,6 +75,7 @@ module.exports = {
       THIEVERY_UNACCEPTABLE: 'thieveryUnacceptable',
       GIVE_ME_A_HAND_HERE: 'giveMeAHandHere',
       GIVE_ME_A_HAND_HERE_ANSWER: 'giveMeAHandHereAnswer',
+      NOPE_I_AM_ON_A_BREAK: 'nopeIAmOnABreak',
     }
   },
   values: {

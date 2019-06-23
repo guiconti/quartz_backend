@@ -32,11 +32,6 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       });
     }
 
-    let alreadyTookCrystal = false;
-    let alreadyGaveCrystal = false;
-    let crystalsTook = 'no crystals';
-    let crystalsGiven = 'no crystals';
-
     for (let i = 0; i < game.players[playerIndex].crystals.length; i++) {
       if (info.taken[i] < 0
         || info.taken[i] > constants.values.cards.GIVE_ME_A_HAND_HERE_TAKE_CRYSTALS_AMOUNT
@@ -45,10 +40,6 @@ module.exports = (game, playerIndex, cardIndex, info) => {
           status: 400,
           msg: constants.messages.error.INVALID_CRYSTAL
         });
-      } else if (!alreadyTookCrystal && info.taken[i] > 0 && i < game.players[playerIndex].crystals.length - 1) {
-        alreadyTookCrystal = true;
-        game.players[playerIndex].crystals[i].amount += info.taken[i];
-        crystalsTook = `${info.taken[i]} -${game.players[playerIndex].crystals[i].name}`;
       }
 
       if (info.given[i] < 0 || info.given[i] > constants.values.cards.GIVE_ME_A_HAND_HERE_GIVE_CRYSTALS_AMOUNT) {
@@ -56,39 +47,84 @@ module.exports = (game, playerIndex, cardIndex, info) => {
           status: 400,
           msg: constants.messages.error.INVALID_CRYSTAL
         });
-      } else if (!alreadyGaveCrystal && info.given[i] > 0) {
-        alreadyGaveCrystal = true;
-        game.players[game.cache[0]].crystals[i].amount += info.given[i];
-        crystalsGiven = `${info.given[i]} -${game.players[playerIndex].crystals[i].name}`;
       }
     }
 
-    if (didPlayerExploded(game, game.cache[0])) {
-      game = playerExploded(game, game.cache[0]);
-    }
+    const targetHaveCounter = game.players[game.cache[0]].cards.findIndex(card => {
+      return card.action === constants.values.cards.GIVE_ME_A_HAND_HERE_REACTION;
+    });
 
-    game = nextTurn(game, playerIndex);
     game.players[playerIndex].hasToAnswerCard = '';
     game.players[playerIndex].answerSocket = {};
+
+    if (targetHaveCounter === -1) {
+      let alreadyTookCrystal = false;
+      let alreadyGaveCrystal = false;
+      let crystalsTook = 'no crystals';
+      let crystalsGiven = 'no crystals';
+
+      for (let i = 0; i < game.players[playerIndex].crystals.length; i++) {
+        if (!alreadyTookCrystal && info.taken[i] > 0 && i < game.players[playerIndex].crystals.length - 1) {
+          alreadyTookCrystal = true;
+          game.players[playerIndex].crystals[i].amount += info.taken[i];
+          crystalsTook = `${info.taken[i]} -${game.players[playerIndex].crystals[i].name}`;
+        }
+
+        if (!alreadyGaveCrystal && info.given[i] > 0) {
+          alreadyGaveCrystal = true;
+          game.players[game.cache[0]].crystals[i].amount += info.given[i];
+          crystalsGiven = `${info.given[i]} -${game.players[playerIndex].crystals[i].name}`;
+        }
+      }
+
+      if (didPlayerExploded(game, game.cache[0])) {
+        game = playerExploded(game, game.cache[0]);
+      }
+
+      game = nextTurn(game, playerIndex);
+      const message = {
+        player: {
+          username: game.players[playerIndex].user.username,
+          _id: game.players[playerIndex]._id
+        },
+        target: {
+          username: game.players[game.cache[0]].user.username,
+          _id: game.players[game.cache[0]]._id
+        },
+        took: crystalsTook,
+        given: crystalsGiven,
+      };
+      return game.save((err, savedGame) => {
+        if (err) {
+          return reject(err);
+        }
+        
+        io.emit(String(savedGame._id), constants.sockets.types.GIVE_ME_A_HAND_HERE, message);
+        io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
+        return resolve();
+      });
+    }
+
+    const targetedPlayerIndex = game.cache[0];
+    game.players[targetedPlayerIndex].hasToAnswerCard = constants.sockets.types.NOPE_I_AM_ON_A_BREAK;
+    game.waitingPlayerForDefensiveResponse = game.players[targetedPlayerIndex]._id;
+    game.cache = [playerIndex].concat(game.cache.slice(1, game.cache.length)).concat([info.taken, info.given]);
     const message = {
       player: {
         username: game.players[playerIndex].user.username,
         _id: game.players[playerIndex]._id
-      },
-      target: {
-        username: game.players[game.cache[0]].user.username,
-        _id: game.players[game.cache[0]]._id
-      },
-      took: crystalsTook,
-      given: crystalsGiven,
+      }
     };
-    game.save((err, savedGame) => {
+    game.players[targetedPlayerIndex].answerSocket = {
+      message,
+      socketType: constants.sockets.types.NOPE_I_AM_ON_A_BREAK,
+    };
+    return game.save((err, savedGame) => {
       if (err) {
         return reject(err);
       }
       
-      io.emit(String(savedGame._id), constants.sockets.types.GIVE_ME_A_HAND_HERE, message);
-      io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
+      io.emit(String(game.players[targetedPlayerIndex]._id), constants.sockets.types.NOPE_I_AM_ON_A_BREAK, message);
       return resolve();
     });
   });
