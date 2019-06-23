@@ -13,6 +13,11 @@ module.exports = mongoose => {
       required: false,
       default: ''
     },
+    answerSocket: {
+      type: Object,
+      required: false,
+      default: {}
+    },
     keptCrystal: {
       type: String,
       required: false,

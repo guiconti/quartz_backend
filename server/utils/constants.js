@@ -9,7 +9,8 @@ module.exports = {
       MESSAGE_SENT: 'Message sent.',
       CRYSTAL_PICKED: 'Crystal picked.',
       CARD_USED: 'Card used.',
-      MINE_CLOSED: 'Mine closed.'
+      MINE_CLOSED: 'Mine closed.',
+      SOCKETS_SENT: 'Sockets send.',
     },
     error: {
       INVALID_NAME: 'Name sent is not valid.',

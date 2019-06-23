@@ -25,6 +25,10 @@ module.exports = (game, playerIndex, cardIndex) => {
     };
     discardCard(game, playerIndex, cardIndex);
     game.players[playerIndex].hasToAnswerCard = constants.sockets.types.EUREKA;
+    game.players[playerIndex].answerSocket = {
+      message,
+      socketType: constants.sockets.types.EUREKA,
+    };
     game.cache = crystalsPicked;
     game.save((err, savedGame) => {
       if (err) {

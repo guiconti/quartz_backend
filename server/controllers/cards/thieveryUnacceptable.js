@@ -21,6 +21,9 @@ module.exports = (game, playerIndex, cardIndex, info) => {
     }
 
     if (!info.used) {
+      game.waitingPlayerForDefensiveResponse = '';
+      game.players[playerIndex].hasToAnswerCard = '';
+      game.players[playerIndex].answerSocket = {};
       let crystalsTook = '';
       for (let i = 1; i < game.cache.length; i++) {
         game.players[playerIndex].crystals[i - 1].amount -= game.cache[i];
@@ -70,6 +73,9 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       }
     }
 
+    game.waitingPlayerForDefensiveResponse = '';
+    game.players[playerIndex].hasToAnswerCard = '';
+    game.players[playerIndex].answerSocket = {};
     let crystalsTook = '';
     for (let i = 0; i < info.pickedCrystals.length; i++) {
       game.players[game.cache[0]].crystals[i].amount -= info.pickedCrystals[i];

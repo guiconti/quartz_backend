@@ -82,6 +82,10 @@ module.exports = (game, playerIndex, cardIndex, info) => {
         _id: game.players[targetedPlayerIndex]._id 
       }
     };
+    game.players[targetedPlayerIndex].answerSocket = {
+      message,
+      socketType: constants.sockets.types.THIS_ISNT_MINE_EITHER
+    };
     game.save((err, savedGame) => {
       if (err) {
         return reject(err);

@@ -25,6 +25,7 @@ module.exports = (game, playerIndex, cardIndex, info) => {
     if (!info.used) {
       game.players[playerIndex].crystals[game.players[playerIndex].crystals.length - 1].amount++;
       game.players[playerIndex].hasToAnswerCard = '';
+      game.players[playerIndex].answerSocket = {};
       game.waitingPlayerForDefensiveResponse = '';
       if (didPlayerExploded(game, playerIndex)) {
         game = playerExploded(game, playerIndex);
@@ -78,6 +79,7 @@ module.exports = (game, playerIndex, cardIndex, info) => {
     }
 
     game.players[playerIndex].hasToAnswerCard = '';
+    game.players[playerIndex].answerSocket = {};
     game.waitingPlayerForDefensiveResponse = '';
     discardCard(game, playerIndex, cardIndex);
 
@@ -118,6 +120,10 @@ module.exports = (game, playerIndex, cardIndex, info) => {
           username: game.players[targetedPlayerIndex].user.username,
           _id: game.players[targetedPlayerIndex]._id 
         }
+      };
+      game.players[targetedPlayerIndex].answerSocket = {
+        message,
+        socketType: constants.sockets.types.THIS_ISNT_MINE_EITHER
       };
       return game.save((err, savedGame) => {
         if (err) {

@@ -102,6 +102,10 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       },
       crystalsTook
     };
+    game.players[targetedPlayerIndex].answerSocket = {
+      message,
+      socketType: constants.sockets.types.THIEVERY_UNACCEPTABLE
+    };
     return game.save((err, savedGame) => {
       if (err) {
         return reject(err);

@@ -73,6 +73,7 @@ module.exports = (req, res) => {
   }
 
   game.players[playerIndex].hasToAnswerCard = '';
+  game.players[playerIndex].answerSocket = {};
   game = nextTurn(game, playerIndex);
 
   game.save((err, savedGame) => {

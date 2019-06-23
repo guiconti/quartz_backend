@@ -19,4 +19,7 @@ router.patch('/:gameId/use_card', gameMiddleware, controllers.useCard);
 //  Cards
 router.use('/:gameId/cards/', gameMiddleware, require('./cards'));
 
+//  Sockets
+router.get('/:gameId/sockets', gameMiddleware, controllers.getSockets);
+
 module.exports = router;
