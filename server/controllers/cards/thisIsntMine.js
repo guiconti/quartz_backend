@@ -15,7 +15,9 @@ module.exports = (game, playerIndex, cardIndex, info) => {
     }
 
     let targetedPlayerIndex = game.players.findIndex(
-      player => String(player.user._id) === info.target && player.isRoundActive
+      player => String(player.user._id) === info.target 
+        && player.isRoundActive
+        && String(player._id) !== String(game.players[playerIndex]._id)
     );
 
     if (targetedPlayerIndex === -1) {

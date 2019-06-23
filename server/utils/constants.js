@@ -70,6 +70,7 @@ module.exports = {
       CRYSTAL_WHAT_CRYSTAL: 'crystalWhatCrystal',
       THIS_ISNT_MINE: 'thisIsntMine',
       THIS_ISNT_MINE_EITHER: 'thisIsntMineEither',
+      THESE_DONT_BELONG_TO_YOU: 'theseDontBelongToYou',
     }
   },
   values: {
@@ -251,7 +252,9 @@ module.exports = {
       },
       AMOUNT_PER_PLAYER: 5,
       EUREKA_CRYSTALS_AMOUNT: 7,
+      THESE_DONT_BELONG_TO_YOU_CRYSTALS_AMOUNT: 2,
       THIS_ISNT_MINE_REACTION: 'notMineEither',
+      THESE_DONT_BELONG_TO_YOU_REACTION: 'thieveryUnacceptable',
     },
     combos: {
       types: {

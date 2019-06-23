@@ -25,6 +25,63 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       });
     }
 
+    if (info.pickedCrystals.reduce((a, b) => a + b) > constants.THESE_DONT_BELONG_TO_YOU_CRYSTALS_AMOUNT) {
+      return reject({
+        status: 400,
+        msg: constants.messages.error.INVALID_CRYSTAL
+      });
+    }
+
+    let targetHaveCounter = false;
+    for (let i = 0; i < game.players[targetedPlayerIndex].cards.length; i++) {
+      if (game.players[targetedPlayerIndex].cards[i].action === constants.values.cards.THESE_DONT_BELONG_TO_YOU_REACTION) {
+        targetHaveCounter = true;
+        break;
+      }
+    }
+
+    if (!targetHaveCounter) {
+      let crystalsTook = '';
+      for (let i = 0; i < info.pickedCrystals.length; i++) {
+        if (info.pickedCrystals[i] < 0
+          || game.players[targetedPlayerIndex].crystals[i].amount < info.pickedCrystals[i]) {
+          return reject({
+            status: 400,
+            msg: constants.messages.error.INVALID_CRYSTAL
+          }); 
+        }
+        game.players[targetedPlayerIndex].crystals[i].amount -= info.pickedCrystals[i];
+        game.players[playerIndex].crystals[i].amount += info.pickedCrystals[i];
+        if (info.pickedCrystals[i] > 0) {
+          crystalsTook += `${info.pickedCrystals[i]} - ${game.players[playerIndex].crystals[i].name} `
+        } 
+      }
+      const message = {
+        player: {
+          username: game.players[playerIndex].user.username,
+          _id: game.players[playerIndex]._id
+        },
+        from: {
+          username: game.players[targetedPlayerIndex].user.username,
+          _id: game.players[targetedPlayerIndex]._id 
+        },
+        took: crystalsTook
+      };
+      discardCard(game, playerIndex, cardIndex);
+      game = nextTurn(game, playerIndex);
+      game.save((err, savedGame) => {
+        if (err) {
+          return reject(err);
+        }
+        
+        io.emit(String(savedGame._id), constants.sockets.types.THESE_DONT_BELONG_TO_YOU, message);
+        io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
+        return resolve();
+      });
+    }
+
+    return resolve();
+
     let givenCrystalIndex = game.players[playerIndex].crystals.findIndex(crystal => { 
       return crystal.name === info.given && crystal.amount > 0; 
     });
