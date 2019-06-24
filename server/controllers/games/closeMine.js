@@ -34,6 +34,19 @@ module.exports = (req, res) => {
       msg: constants.messages.error.NOT_USERS_TURN
     });
   }
+
+  let canPickACard = false;
+  for (let i = 0; i < game.players.length; i++) {
+    if (!game.players[i].isRoundActive) {
+      canPickACard = true;
+      break;
+    }
+  }
+
+  if (canPickACard) {
+    game.players[playerIndex].cards.push(JSON.parse(JSON.stringify(game.cardsBoard.shift())));
+  }
+
   game.players[playerIndex].isRoundActive = false;
   game.players[playerIndex].currentTurn = false;
   if (isRoundOver(game)) {

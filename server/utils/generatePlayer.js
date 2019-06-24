@@ -9,9 +9,10 @@ module.exports = (userId, cardsPile) => {
   let playerCards = [];
   for (let i = 0; i < constants.values.cards.AMOUNT_PER_PLAYER; i++) {
     let shuffleCards = cardsPile.reduce((previousValue, currentValue, currentIndex) => {
-      return previousValue + String(currentIndex).repeat(currentValue.amount);
+      return previousValue + String(constants.shuffleDictionary[currentIndex]).repeat(currentValue.amount);
     }, '');
     let newPlayerCardIndex = shuffleCards[Math.floor(Math.random() * (shuffleCards.length - 1))];
+    newPlayerCardIndex = constants.shuffleDictionary.findIndex(item => item == newPlayerCardIndex);
     playerCards.push(JSON.parse(JSON.stringify(cardsPile[newPlayerCardIndex])));
     cardsPile[newPlayerCardIndex].amount--;
   }
