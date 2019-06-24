@@ -7,7 +7,7 @@ const constants = require('./constants');
 
 module.exports = (cardsPile, playersAmount) => {
   let cardsBoard = [];
-  for (let i = 0; i < playersAmount; i++) {
+  for (let i = 0; i < playersAmount - 1; i++) {
     let shuffleCards = cardsPile.reduce((previousValue, currentValue, currentIndex) => {
       return previousValue + String(currentIndex).repeat(currentValue.amount);
     }, '');
