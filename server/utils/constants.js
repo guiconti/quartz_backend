@@ -52,13 +52,17 @@ module.exports = {
   sockets: {
     types: {
       CONNECT: 'connection',
+      JOIN_LOBBY: 'joinLobby',
+      LEAVE_LOBBY: 'leaveLobby',
       JOIN_ROOM: 'joinRoom',
       LEAVE_ROOM: 'leaveRoom',
+      NEW_ROOM: 'newRoom',
       NEW_USER: 'newUser',
       NEW_MESSAGE: 'newMessage',
       START_GAME: 'startGame',
       JOIN_GAME: 'joinGame',
       LEAVE_GAME: 'leaveGame',
+      NEW_GAME: 'newGame',
       JOIN_PLAYER_ROOM: 'joinPlayerRoom',
       LEAVE_PLAYER_ROOM: 'leavePlayerRoom',
       UPDATE_GAME: 'updateGame',

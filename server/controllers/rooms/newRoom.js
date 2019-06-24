@@ -28,6 +28,7 @@
  */
 const logger = require('../../../tools/logger');
 const database = require('../../models/database');
+const io = require('../../utils/io');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
 
@@ -63,7 +64,7 @@ module.exports = (req, res) => {
         msg: constants.messages.error.UNEXPECTED_DB
       });
     }
-
+    io.emit(constants.sockets.types.JOIN_LOBBY, constants.sockets.types.NEW_ROOM, room);
     return res.status(200).json({
       msg: room
     });

@@ -12,6 +12,12 @@ exports.initialize = server => {
   io = socketIO(server);
 
   io.on(constants.sockets.types.CONNECT, socket => {
+    socket.on(constants.sockets.types.JOIN_LOBBY, roomId => {
+      socket.join(constants.sockets.types.JOIN_LOBBY);
+    });
+    socket.on(constants.sockets.types.LEAVE_LOBBY, roomId => {
+      socket.join(constants.sockets.types.LEAVE_LOBBY);
+    });
     socket.on(constants.sockets.types.JOIN_ROOM, roomId => {
       socket.join(roomId);
     });
