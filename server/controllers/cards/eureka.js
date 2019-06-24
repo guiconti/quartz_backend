@@ -4,6 +4,15 @@ const constants = require('../../utils/constants');
 
 module.exports = (game, playerIndex, cardIndex) => {
   return new Promise((resolve, reject) => {
+    if (game.players[playerIndex].crystals.reduce((a, b) => a + b.amount, 0) 
+      === game.players[playerIndex].crystals[game.players[playerIndex].crystals.length - 1].amount)
+    {
+      return reject({
+        status: 400,
+        msg: constants.messages.error.INVALID_CRYSTAL
+      });
+    }
+
     let crystalsPicked = [];
     let crystalsPickedAux = [];
     for (let i = 0; i < constants.values.cards.EUREKA_CRYSTALS_AMOUNT; i++) {
