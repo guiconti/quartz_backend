@@ -11,10 +11,11 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
 
+app.options('*', cors());
 app.use(
   cors({
     origin: [`http://${process.env.FRONTEND_HOST}`, `https://${process.env.FRONTEND_HOST}`, 'localhost:3330', 'http://localhost:3330'],
-    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
   })
 );
