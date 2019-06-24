@@ -99,6 +99,7 @@ module.exports = (req, res) => {
           });
         }
         io.emit(roomId, constants.sockets.types.START_GAME, game);
+        io.emit(constants.sockets.types.JOIN_LOBBY, constants.sockets.types.NEW_GAME, game);
         room.active = false;
         room.save();
         return res.status(200).json({
