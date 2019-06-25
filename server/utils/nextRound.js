@@ -11,17 +11,17 @@ const constants = require('./constants');
 module.exports = game => {
   game.cave = generateCave();
   game.cardsDiscarded = game.cardsDiscarded.concat(JSON.parse(JSON.stringify(game.cardsBoard)));
-  game.cardsBoard = generateCardsBoard(game.cardsPile, game.players.length);
   let amountOfRemainingCards = game.cardsPile.reduce((a, b) => a + b.amount, 0);
   if (amountOfRemainingCards < game.players.length + game.players.length - 1) {
     for (let i = 0; i < game.cardsDiscarded.length; i++) {
       cardIndex = game.cardsPile.findIndex(card => {
-        return card.action === game.cardsDiscarded.action;
+        return card.action === game.cardsDiscarded[i].action;
       });
       game.cardsPile[cardIndex].amount++;
     }
     game.cardsDiscarded = [];
   }
+  game.cardsBoard = generateCardsBoard(game.cardsPile, game.players.length);
   game.players.forEach(player => {
     player.isRoundActive = true;
     player.currentTurn = false;
