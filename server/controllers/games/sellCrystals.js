@@ -66,7 +66,7 @@ module.exports = (req, res) => {
     }
     io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
     const message = {
-      message: `You received ${moneyWon} for this day of work.`
+      message: `You received ${moneyWon} coins for this day of work.`
     };
     io.emit(String(game.players[playerIndex]._id), constants.sockets.types.INFORMATIVE, message)
     return res.status(200).json({
