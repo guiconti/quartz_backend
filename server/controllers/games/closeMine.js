@@ -65,6 +65,7 @@ module.exports = (req, res) => {
     }
     if (pickedCard) {
       const message = {
+        title: 'What a brave man!',
         message: `You were brave enough to last until this far. We salute you by giving you the ${pickedCard.name} card.`
       };
       io.emit(String(game.players[playerIndex]._id), constants.sockets.types.INFORMATIVE, message);
