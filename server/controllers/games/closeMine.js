@@ -43,8 +43,10 @@ module.exports = (req, res) => {
     }
   }
 
+  let pickedCard = null;
   if (canPickACard) {
-    game.players[playerIndex].cards.push(JSON.parse(JSON.stringify(game.cardsBoard.shift())));
+    pickedCard = JSON.parse(JSON.stringify(game.cardsBoard.shift()));
+    game.players[playerIndex].cards.push(pickedCard);
   }
 
   game.players[playerIndex].isRoundActive = false;
@@ -60,6 +62,12 @@ module.exports = (req, res) => {
       return res.status(500).json({
         msg: constants.messages.error.UNEXPECTED_DB
       });
+    }
+    if (pickedCard) {
+      const message = {
+        message: `You were brave enough to last until this far. We salute you by giving you the ${pickedCard.name} card.`
+      };
+      io.emit(String(game.players[playerIndex]._id), constants.sockets.types.INFORMATIVE, message);
     }
     io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
     return res.status(200).json({

@@ -66,6 +66,7 @@ module.exports = {
       JOIN_PLAYER_ROOM: 'joinPlayerRoom',
       LEAVE_PLAYER_ROOM: 'leavePlayerRoom',
       UPDATE_GAME: 'updateGame',
+      INFORMATIVE: 'informative',
       CRYSTAL_PICKED: 'crystalPicked',
       HERE_WE_GO: 'hereWeGo',
       EUREKA: 'eureka',
