@@ -67,12 +67,14 @@ module.exports = (game, playerIndex, cardIndex, info) => {
         if (!alreadyTookCrystal && info.taken[i] > 0 && i < game.players[playerIndex].crystals.length - 1) {
           alreadyTookCrystal = true;
           game.players[playerIndex].crystals[i].amount += info.taken[i];
+          game.cave.crystals[i].amount -= info.taken[i];
           crystalsTook = `${info.taken[i]} -${game.players[playerIndex].crystals[i].name}`;
         }
 
         if (!alreadyGaveCrystal && info.given[i] > 0) {
           alreadyGaveCrystal = true;
           game.players[game.cache[0]].crystals[i].amount += info.given[i];
+          game.cave.crystals[i].amount -= info.given[i];
           crystalsGiven = `${info.given[i]} -${game.players[playerIndex].crystals[i].name}`;
         }
       }
