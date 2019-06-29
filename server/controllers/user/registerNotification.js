@@ -44,8 +44,8 @@ module.exports = (req, res) => {
       msg: constants.messages.error.INVALID_NOTIFICATION_SETTINGS
     });
   }
-
-  for (let i = 0; user.notificationSettings.length; i++) {
+  console.log(user);
+  for (let i = 0; i < user.notificationSettings.length; i++) {
     if (user.notificationSettings[i].keys.auth === keys.auth) {
       return res.status(200).json({});
     }
