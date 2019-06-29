@@ -18,7 +18,6 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use('/', express.static('./ssl'));
 app.use('/', router);
 app.use(logger.errorHandler());
 

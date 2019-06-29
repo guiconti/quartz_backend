@@ -3,6 +3,8 @@
  * @module utils/nextTurn
  */
 
+const push = require('./push');
+
 module.exports = (game, playerIndex) => {
   game.players[playerIndex].currentTurn = false;
   playerIndex++;
@@ -14,6 +16,16 @@ module.exports = (game, playerIndex) => {
       break;
     }
     playerIndex++;
+  }
+  if (game.players[playerIndex].notificationSettings) {
+    const payload = {
+      title: 'It\'s your turn!',
+      body: 'Go mine some crystals.',
+      icon: '/static/icon-192x192.png'
+    };
+    for (let i = 0; i < game.players[playerIndex].notificationSettings.length; i++) {
+      push(game.players[playerIndex].notificationSettings[i], payload);
+    }
   }
   return game;
 };
