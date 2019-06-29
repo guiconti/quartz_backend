@@ -14,7 +14,7 @@ module.exports = (game, playerIndex, payload) => {
   return new Promise((resolve, reject) => {
     if (game.players[playerIndex].user.notificationSettings) {
       for (let i = 0; i < game.players[playerIndex].user.notificationSettings.length; i++) {
-        push.sendNotification(game.players[playerIndex].user.notificationSettings[i], payload);
+        push.sendNotification(game.players[playerIndex].user.notificationSettings[i], JSON.stringify(payload));
       }
     }
     return resolve();
