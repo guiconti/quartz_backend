@@ -6,6 +6,7 @@
 const generateCave = require('./generateCave');
 const generateCardsBoard = require('./generateCardsBoard');
 const pickCard = require('./pickCard');
+const push = require('./push');
 const constants = require('./constants');
 
 module.exports = game => {
@@ -33,14 +34,23 @@ module.exports = game => {
   });
   if (game.round > constants.values.MAX_ROUNDS) {
     game.active = false;
+    const payload = {
+      title: constants.messages.push.gameOver.title,
+      body: constants.messages.push.gameOver.body,
+      icon: '/static/icon-192x192.png',
+      data: {
+        url: `https://quartz.tiimus.com/games/${String(game._id)}`
+      }
+    };
     for (let i = 0; i < game.players.length; i++) {
       if (game.players[i].hasAnIdiotBook) {
         game.players[i].hasAnIdiotBook = false;
         game.players[i].money += constants.values.IDIOT_BOOK_VALUE;
-        for (let j = 0; game.players[i].cards; j++) {
-          game.players[i].money += game.players[i].cards[j].value;
-        }
       }
+      for (let j = 0; game.players[i].cards; j++) {
+        game.players[i].money += game.players[i].cards[j].value;
+      }
+      push(game, playerIndex, payload);
     }
     return game;
   }

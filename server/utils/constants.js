@@ -55,6 +55,10 @@ module.exports = {
       defend: {
         title: 'Defend youserlf!',
         body: 'Someone is trying to play tricks on you'
+      },
+      gameOver: {
+        title: 'The game is over',
+        body: 'Check who is the best miner'
       }
     }
   },
