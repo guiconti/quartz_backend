@@ -8,6 +8,6 @@ const controllers = retrieveControllers(path.basename(__filename).split('.')[0])
 
 //  Auth API
 router.get('/', userMiddleware, controllers.userInfo);
-
+router.post('/notification', userMiddleware, controllers.registerNotification);
 
 module.exports = router;

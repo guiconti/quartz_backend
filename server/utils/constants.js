@@ -26,6 +26,7 @@ module.exports = {
       INVALID_CRYSTAL: 'Crystal sent is not valid.',
       INVALID_GAME: 'Game id sent is not valid.',
       INVALID_SELLING: 'Selling data sent is not valid.',
+      INVALID_NOTIFICATION_SETTINGS: 'Notification settings sent are invalid.',
       USER_NOT_PLAYING: 'This user is not a member of this game.',
       NOT_USERS_TURN: 'This is not the user\'s turn.',
       NOT_OWNER: 'You do not own this room.',
