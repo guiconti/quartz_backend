@@ -24,7 +24,7 @@ module.exports = (game, playerIndex) => {
       icon: '/static/icon-192x192.png'
     };
     for (let i = 0; i < game.players[playerIndex].user.notificationSettings.length; i++) {
-      push(game.players[playerIndex].notificationSettings[i], payload);
+      push(game.players[playerIndex].user.notificationSettings[i], payload);
     }
   }
   return game;
