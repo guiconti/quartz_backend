@@ -37,6 +37,9 @@ module.exports = game => {
       if (game.players[i].hasAnIdiotBook) {
         game.players[i].hasAnIdiotBook = false;
         game.players[i].money += constants.values.IDIOT_BOOK_VALUE;
+        for (let j = 0; game.players[i].cards; j++) {
+          game.players[i].money += game.players[i].cards[j].value;
+        }
       }
     }
     return game;
