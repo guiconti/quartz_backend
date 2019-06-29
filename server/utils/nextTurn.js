@@ -21,7 +21,8 @@ module.exports = (game, playerIndex) => {
     const payload = {
       title: 'It\'s your turn!',
       body: 'Go mine some crystals.',
-      icon: '/static/icon-192x192.png'
+      icon: '/static/icon-192x192.png',
+      url: `https://quartz.tiimus.com/games/${String(game._id)}`
     };
     for (let i = 0; i < game.players[playerIndex].user.notificationSettings.length; i++) {
       push(game.players[playerIndex].user.notificationSettings[i], payload);
