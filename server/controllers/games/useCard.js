@@ -41,7 +41,7 @@ module.exports = (req, res) => {
     return card.action === action;
   });
 
-  if (cardIndex === -1 || (game.players[playerIndex].hasToAnswerCard !== '' && game.players[playerIndex].hasToAnswerCard !== action)) {
+  if (cardIndex === -1 && game.players[playerIndex].hasToAnswerCard !== action) {
     return res.status(400).json({
       msg: constants.messages.error.USER_DONT_HAVE_CARD
     });
