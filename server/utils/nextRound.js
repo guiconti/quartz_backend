@@ -50,7 +50,7 @@ module.exports = game => {
       for (let j = 0; game.players[i].cards; j++) {
         game.players[i].money += game.players[i].cards[j].value;
       }
-      push(game, playerIndex, payload);
+      push(game, i, payload);
     }
     return game;
   }
