@@ -54,9 +54,18 @@ module.exports = game => {
     }
     return game;
   }
-  
-  game.players[Math.floor(Math.random() * (game.players.length - 1))].currentTurn = true;
+  let firstToPlayIndex = Math.floor(Math.random() * (game.players.length - 1));
+  game.players[firstToPlayIndex].currentTurn = true;
   game.round++;
   game.isSelling = false;
+  const payload = {
+    title: constants.messages.push.currentTurn.title,
+    body: constants.messages.push.currentTurn.body,
+    icon: '/static/icon-192x192.png',
+    data: {
+      url: `https://quartz.tiimus.com/games/${String(game._id)}`
+    }
+  };
+  push(game, firstToPlayIndex, payload);
   return game;
 };
