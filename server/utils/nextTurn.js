@@ -17,13 +17,13 @@ module.exports = (game, playerIndex) => {
     }
     playerIndex++;
   }
-  if (game.players[playerIndex].notificationSettings) {
+  if (game.players[playerIndex].user.notificationSettings) {
     const payload = {
       title: 'It\'s your turn!',
       body: 'Go mine some crystals.',
       icon: '/static/icon-192x192.png'
     };
-    for (let i = 0; i < game.players[playerIndex].notificationSettings.length; i++) {
+    for (let i = 0; i < game.players[playerIndex].user.notificationSettings.length; i++) {
       push(game.players[playerIndex].notificationSettings[i], payload);
     }
   }
