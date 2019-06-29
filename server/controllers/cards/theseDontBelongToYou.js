@@ -1,6 +1,7 @@
 const io = require('../../utils/io');
 const nextTurn = require('../../utils/nextTurn');
 const discardCard = require('../../utils/discardCard');
+const push = require('../../utils/push');
 const constants = require('../../utils/constants');
 
 module.exports = (game, playerIndex, cardIndex, info) => {
@@ -110,7 +111,15 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       if (err) {
         return reject(err);
       }
-      
+      const payload = {
+        title: constants.messages.push.defend.title,
+        body: constants.messages.push.defend.body,
+        icon: '/static/icon-192x192.png',
+        data: {
+          url: `https://quartz.tiimus.com/games/${String(game._id)}`
+        }
+      };
+      push(game, targetedPlayerIndex, payload);
       io.emit(String(game.players[targetedPlayerIndex]._id), constants.sockets.types.THIEVERY_UNACCEPTABLE, message);
       return resolve();
     });

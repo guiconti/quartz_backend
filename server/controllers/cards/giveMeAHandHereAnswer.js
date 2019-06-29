@@ -2,6 +2,7 @@ const io = require('../../utils/io');
 const didPlayerExploded = require('../../utils/didPlayerExploded');
 const playerExploded = require('../../utils/playerExploded');
 const nextTurn = require('../../utils/nextTurn');
+const push = require('../../utils/push');
 const constants = require('../../utils/constants');
 
 module.exports = (game, playerIndex, cardIndex, info) => {
@@ -125,7 +126,15 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       if (err) {
         return reject(err);
       }
-      
+      const payload = {
+        title: constants.messages.push.defend.title,
+        body: constants.messages.push.defend.body,
+        icon: '/static/icon-192x192.png',
+        data: {
+          url: `https://quartz.tiimus.com/games/${String(game._id)}`
+        }
+      };
+      push(game, targetedPlayerIndex, payload);
       io.emit(String(game.players[targetedPlayerIndex]._id), constants.sockets.types.NOPE_I_AM_ON_A_BREAK, message);
       return resolve();
     });
