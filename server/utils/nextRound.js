@@ -31,7 +31,7 @@ module.exports = game => {
       game.cave.crystals[i].amount -= player.crystals[i].amount;
     }
   });
-  if (game.round >= constants.values.MAX_ROUNDS) {
+  if (game.round > constants.values.MAX_ROUNDS) {
     game.active = false;
     for (let i = 0; i < game.players.length; i++) {
       if (game.players[i].hasAnIdiotBook) {
