@@ -4,6 +4,7 @@
  */
 
 const push = require('./push');
+const constants = require('./constants');
 
 module.exports = (game, playerIndex) => {
   game.players[playerIndex].currentTurn = false;
@@ -17,16 +18,14 @@ module.exports = (game, playerIndex) => {
     }
     playerIndex++;
   }
-  if (game.players[playerIndex].user.notificationSettings) {
-    const payload = {
-      title: 'It\'s your turn!',
-      body: 'Go mine some crystals.',
-      icon: '/static/icon-192x192.png',
+  const payload = {
+    title: constants.messages.push.currentTurn.title,
+    body: constants.messages.push.currentTurn.body,
+    icon: '/static/icon-192x192.png',
+    data: {
       url: `https://quartz.tiimus.com/games/${String(game._id)}`
-    };
-    for (let i = 0; i < game.players[playerIndex].user.notificationSettings.length; i++) {
-      push(game.players[playerIndex].user.notificationSettings[i], payload);
     }
-  }
+  };
+  push(game, playerIndex, payload);
   return game;
 };

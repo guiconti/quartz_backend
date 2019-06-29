@@ -10,8 +10,13 @@ const options = {
   }
 };
 
-module.exports = (pushSubscription, payload) => {
+module.exports = (game, playerIndex, payload) => {
   return new Promise((resolve, reject) => {
-    push.sendNotification(pushSubscription, JSON.stringify(payload), options);
+    if (game.players[playerIndex].user.notificationSettings) {
+      for (let i = 0; i < game.players[playerIndex].user.notificationSettings.length; i++) {
+        push.sendNotification(game.players[playerIndex].user.notificationSettings[i], payload);
+      }
+    }
+    return resolve();
   });
 };

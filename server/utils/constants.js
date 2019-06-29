@@ -42,6 +42,20 @@ module.exports = {
       USERNAME_NOT_UNIQUE: 'This username is already being used',
       UNEXPECTED_RUNNING: 'An error ocurred while processing your request. Please try again.',
       UNEXPECTED_DB: 'An error ocurred while accessing our database. Please try again.'
+    },
+    push: {
+      currentTurn: {
+        title: 'It\'s your turn!',
+        body: 'Go mine some crystals'
+      },
+      selling: {
+        title: 'Round is over',
+        body: 'It\'s time to sell some crystals',
+      },
+      defend: {
+        title: 'Defend youserlf!',
+        body: 'Someone is trying to play tricks on you'
+      }
     }
   },
   regex: {
