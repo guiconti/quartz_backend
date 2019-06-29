@@ -23,6 +23,7 @@ module.exports = (game, playerIndex, cardIndex) => {
         if (crystalPicker.length > 0) {
           pickedCrystalIndex = crystalPicker[Math.floor(Math.random() * (crystalPicker.length - 1))];
           game.players[i].crystals[pickedCrystalIndex].amount--;
+          game.cave.crystals[pickedCrystalIndex].amount++;
           crystalLost.crystal = game.players[i].crystals[pickedCrystalIndex].name;
         }
         crystalsLost.push(crystalLost);
