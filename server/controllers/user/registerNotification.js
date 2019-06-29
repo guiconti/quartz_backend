@@ -46,7 +46,7 @@ module.exports = (req, res) => {
   }
 
   for (let i = 0; user.notificationSettings.length; i++) {
-    if (user.notificationSettings[i].keys.auth === auth) {
+    if (user.notificationSettings[i].keys.auth === keys.auth) {
       return res.status(200).json({});
     }
   }
