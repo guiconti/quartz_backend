@@ -32,7 +32,7 @@ const constants = require('../../utils/constants');
  */
 module.exports = (req, res) => {
   database.Users
-    .findById(req.user.id, '_id username')
+    .findById(req.user.id, '_id username notificationSettings')
     .exec((err, user) => {
     if (err) {
       return res.status(500).json({
