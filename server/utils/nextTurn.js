@@ -21,7 +21,7 @@ module.exports = (game, playerIndex) => {
   const payload = {
     title: constants.messages.push.currentTurn.title,
     body: constants.messages.push.currentTurn.body,
-    icon: '/static/icon-192x192.png',
+    icon: constants.assets.smallIcon,
     data: {
       url: `https://quartz.tiimus.com/games/${String(game._id)}`
     }

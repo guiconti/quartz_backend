@@ -37,7 +37,7 @@ module.exports = game => {
     const payload = {
       title: constants.messages.push.gameOver.title,
       body: constants.messages.push.gameOver.body,
-      icon: '/static/icon-192x192.png',
+      icon: constants.assets.smallIcon,
       data: {
         url: `https://quartz.tiimus.com/games/${String(game._id)}`
       }
@@ -61,7 +61,7 @@ module.exports = game => {
   const payload = {
     title: constants.messages.push.currentTurn.title,
     body: constants.messages.push.currentTurn.body,
-    icon: '/static/icon-192x192.png',
+    icon: constants.assets.smallIcon,
     data: {
       url: `https://quartz.tiimus.com/games/${String(game._id)}`
     }

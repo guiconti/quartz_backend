@@ -11,7 +11,7 @@ module.exports = game => {
   const payload = {
     title: constants.messages.push.selling.title,
     body: constants.messages.push.selling.body,
-    icon: '/static/icon-192x192.png',
+    icon: constants.assets.smallIcon,
     data: {
       url: `https://quartz.tiimus.com/games/${String(game._id)}`
     }
