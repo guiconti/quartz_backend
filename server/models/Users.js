@@ -8,6 +8,7 @@ module.exports = mongoose => {
     password: {
       type: String
     },
-    notificationSettings: [ mongoose.Schema.NotificationSettings ]
+    notificationSettings: [ mongoose.Schema.NotificationSettings ],
+    summary: mongoose.Schema.Summary,
   });
 };

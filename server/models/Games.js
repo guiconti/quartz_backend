@@ -6,6 +6,7 @@ module.exports = mongoose => {
     cardsBoard: [ mongoose.Schema.Cards ],
     cardsPile: [ mongoose.Schema.Cards ],
     cardsDiscarded: [ mongoose.Schema.Cards ],
+    summaries: [ mongoose.Schema.Summary ],
     waitingPlayerForDefensiveResponse: {
       type: String,
       required: false,

@@ -35,6 +35,7 @@ const generatePlayer = require('../../utils/generatePlayer');
 const generateCave = require('../../utils/generateCave');
 const generateCardsPile = require('../../utils/generateCardsPile');
 const generateCardsBoard = require('../../utils/generateCardsBoard');
+const generateSummaries = require('../../utils/generateSummaries');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
 const io = require('../../utils/io');
@@ -90,7 +91,8 @@ module.exports = (req, res) => {
         cave: generateCave(),
         cardsBoard: generateCardsBoard(cardsPile, playersData.length),
         cardsPile: cardsPile,
-        cardsDiscarded: []
+        cardsDiscarded: [],
+        summaries: generateSummaries(game),
       };
       database.Games.create(gameData, (err, game) => {
         if (err) {
