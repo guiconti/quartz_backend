@@ -75,7 +75,7 @@ module.exports = (game, playerIndex, cardIndex, info) => {
     }
 
     discardCard(game, playerIndex, cardIndex);
-    game = nextTurn(game, playerIndex);
+    game = nextTurn(game, game.cache[0]);
 
     const message = {
       player: {
