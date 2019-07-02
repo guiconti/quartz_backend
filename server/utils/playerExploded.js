@@ -3,6 +3,9 @@
  * @module utils/playerExploded
  */
 
+const updateSummary = require('./updateSummary');
+const constants = require('./constants');
+
 module.exports = (game, playerIndex) => {
   game.players[playerIndex].currentTurn = false;
   game.players[playerIndex].isRoundActive = false;
@@ -11,5 +14,6 @@ module.exports = (game, playerIndex) => {
     game.cave.crystals[i].amount += game.players[playerIndex].crystals[i].amount;
     game.players[playerIndex].crystals[i].amount = 0;
   }
+  updateSummary(game, playerIndex, constants.values.summary.EXPLODED);
   return game;
 };

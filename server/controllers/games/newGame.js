@@ -92,7 +92,7 @@ module.exports = (req, res) => {
         cardsBoard: generateCardsBoard(cardsPile, playersData.length),
         cardsPile: cardsPile,
         cardsDiscarded: [],
-        summaries: generateSummaries(game),
+        summaries: generateSummaries(room.users.length),
       };
       database.Games.create(gameData, (err, game) => {
         if (err) {

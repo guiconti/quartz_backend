@@ -17,6 +17,11 @@ module.exports = mongoose => {
       required: false,
       default: 0,
     },
+    games: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
     wins: {
       type: Number,
       required: false,

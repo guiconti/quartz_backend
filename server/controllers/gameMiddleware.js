@@ -38,7 +38,7 @@ module.exports = (req, res, next) => {
     .findById(gameId)
     .populate({
       path: 'players.user',
-      select: 'username notificationSettings'
+      select: 'username notificationSettings summary'
     })
     .exec((err, game) => {
       if (err) {

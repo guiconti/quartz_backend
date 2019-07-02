@@ -69,7 +69,13 @@ module.exports = (req, res) => {
       title: 'Day of work summary',
       message: `You received ${moneyWon} coins for this day of work.`
     };
-    io.emit(String(game.players[playerIndex]._id), constants.sockets.types.INFORMATIVE, message)
+    io.emit(String(game.players[playerIndex]._id), constants.sockets.types.INFORMATIVE, message);
+    if (!game.active) {
+      //  Save summary
+      game.players.forEach(player => {
+        player.user.save((err, userSaved) => {});
+      });
+    }
     return res.status(200).json({
       msg: moneyWon
     });

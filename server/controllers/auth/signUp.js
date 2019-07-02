@@ -22,6 +22,7 @@
 const database = require('../../models/database');
 const encryptor = require('../../utils/encryptor');
 const generateToken = require('../../utils/generateToken');
+const generateSummaries = require('../../utils/generateSummaries');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
 
@@ -56,7 +57,9 @@ module.exports = (req, res) => {
     });
   }
 
-  const newUser = new database.Users({ username, password });
+  const summary = generateSummaries();
+
+  const newUser = new database.Users({ username, password, summary });
   newUser.save((err, user) => {
     if (err) {
       if (err.code === constants.values.errorCodes.DUPLICATE_UNIQUE) {

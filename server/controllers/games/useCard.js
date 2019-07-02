@@ -13,7 +13,7 @@
   *
  */
 const constants = require('../../utils/constants');
-
+const updateSummary = require('../../utils/updateSummary');
 const retrieveControllers = require('../../utils/retrieveControllers');
 const cards = retrieveControllers('cards');
 
@@ -46,6 +46,8 @@ module.exports = (req, res) => {
       msg: constants.messages.error.USER_DONT_HAVE_CARD
     });
   }
+
+  updateSummary(game, playerIndex, constants.values.summary.USED_CARD, game.players[playerIndex].cards[cardIndex]);
   
   return cards[action](game, playerIndex, cardIndex, info)
     .then(() => {

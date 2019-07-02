@@ -290,6 +290,13 @@ module.exports = {
       THESE_DONT_BELONG_TO_YOU_REACTION: 'thieveryUnacceptable',
       GIVE_ME_A_HAND_HERE_REACTION: 'nopeIAmOnABreak',
     },
+    summary: {
+      PICKED_CRYSTAL: 0,
+      USED_CARD: 1,
+      EXPLODED: 2,
+      CLOSED: 3,
+      END_GAME: 4,
+    },
     IDIOT_BOOK_VALUE: 3,
     combos: {
       types: {

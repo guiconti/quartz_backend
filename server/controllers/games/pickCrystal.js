@@ -18,6 +18,7 @@ const didPlayerExploded = require('../../utils/didPlayerExploded');
 const playerExploded = require('../../utils/playerExploded');
 const isRoundOver = require('../../utils/isRoundOver');
 const startSelling = require('../../utils/startSelling');
+const updateSummary = require('../../utils/updateSummary');
 const constants = require('../../utils/constants');
 
 /**
@@ -52,6 +53,7 @@ module.exports = (req, res) => {
     },
     crystal: game.cave.crystals[crystalIndex].name
   };
+  updateSummary(game, playerIndex, constants.values.summary.PICKED_CRYSTAL, game.cave.crystals[crystalIndex]);
   if (didPlayerExploded(game, playerIndex)) {
     game = playerExploded(game, playerIndex);
     if (isRoundOver(game)) {

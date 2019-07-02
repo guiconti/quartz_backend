@@ -7,6 +7,8 @@ const generateCave = require('./generateCave');
 const generateCardsBoard = require('./generateCardsBoard');
 const pickCard = require('./pickCard');
 const push = require('./push');
+const updateSummary = require('./updateSummary');
+const updatePlayerSummary = require('./updatePlayerSummary');
 const constants = require('./constants');
 
 module.exports = game => {
@@ -51,6 +53,17 @@ module.exports = game => {
         game.players[i].money += game.players[i].cards[j].value;
       }
       push(game, i, payload);
+    }
+    game.players.sort((a, b) => {
+      if (a.money < b.money)
+        return -1;
+      if (a.money > b.money)
+        return 1;
+      return 0;
+    });
+    for (let i = 0; i < game.players.length; i++) {
+      updateSummary(game, i, constants.values.summary.END_GAME, { won: i === 0 || (i > 0 && game.players[i].money === game.players[i - 1].money) });
+      updatePlayerSummary(game, i);
     }
     return game;
   }
