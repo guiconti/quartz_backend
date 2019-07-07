@@ -27,6 +27,11 @@ module.exports = mongoose => {
       required: false,
       default: 1
     },
+    amountOfRounds: {
+      type: Number,
+      required: false,
+      default: 1
+    },
     active: {
       type: Boolean,
       required: false,

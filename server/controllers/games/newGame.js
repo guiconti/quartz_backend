@@ -93,6 +93,7 @@ module.exports = (req, res) => {
         cardsPile: cardsPile,
         cardsDiscarded: [],
         summaries: generateSummaries(room.users.length),
+        amountOfRounds: constants.values.MAX_ROUNDS,
       };
       database.Games.create(gameData, (err, game) => {
         if (err) {

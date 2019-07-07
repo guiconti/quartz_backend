@@ -35,7 +35,7 @@ module.exports = game => {
     }
   });
   game.round++;
-  if (game.round > constants.values.MAX_ROUNDS) {
+  if (game.round > game.amountOfRounds) {
     game.active = false;
     const payload = {
       title: constants.messages.push.gameOver.title,
