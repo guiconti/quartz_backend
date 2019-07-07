@@ -34,6 +34,7 @@ module.exports = game => {
       game.cave.crystals[i].amount -= player.crystals[i].amount;
     }
   });
+  game.round++;
   if (game.round > constants.values.MAX_ROUNDS) {
     game.active = false;
     const payload = {
@@ -69,7 +70,6 @@ module.exports = game => {
   }
   let firstToPlayIndex = Math.floor(Math.random() * (game.players.length - 1));
   game.players[firstToPlayIndex].currentTurn = true;
-  game.round++;
   game.isSelling = false;
   const payload = {
     title: constants.messages.push.currentTurn.title,
