@@ -12,13 +12,8 @@ module.exports = (game, playerIndex, type, payload = {}) => {
       break;
     case constants.values.summary.USED_CARD:
       for (let i = 0; i < game.summaries[playerIndex].cards.length; i++) {
-        console.log(game.summaries[playerIndex].cards[i].action);
-        console.log(payload.action);
-        console.log(game.summaries[playerIndex].cards[i].action === payload.action)
         if (game.summaries[playerIndex].cards[i].action === payload.action) {
-          console.log(game.summaries[playerIndex].cards[i].amount);
           game.summaries[playerIndex].cards[i].amount++;
-          console.log(game.summaries[playerIndex].cards[i].amount);
           break;
         }
       }
