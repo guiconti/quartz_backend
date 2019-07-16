@@ -29,7 +29,7 @@ const constants = require('../../utils/constants');
  * @throws {object} - Returns a msg that indicates a failure
  *
  */
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   let { game, playerIndex } = req;
 
   if (!game.players[playerIndex].currentTurn
@@ -54,8 +54,10 @@ module.exports = (req, res) => {
     crystal: game.cave.crystals[crystalIndex].name
   };
   updateSummary(game, playerIndex, constants.values.summary.PICKED_CRYSTAL, game.cave.crystals[crystalIndex]);
+  let sentExplosionMessage = false;
   if (didPlayerExploded(game, playerIndex)) {
-    game = playerExploded(game, playerIndex);
+    game = await playerExploded(game, playerIndex);
+    sentExplosionMessage = true;
     if (isRoundOver(game)) {
       startSelling(game);
     } else {
@@ -72,7 +74,8 @@ module.exports = (req, res) => {
       });
     }
     
-    io.emit(String(savedGame._id), constants.sockets.types.CRYSTAL_PICKED, crystalPicked);
+    if (!sentExplosionMessage)
+      io.emit(String(savedGame._id), constants.sockets.types.CRYSTAL_PICKED, crystalPicked);
     io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
     return res.status(200).json({
       msg: constants.messages.info.CRYSTAL_PICKED

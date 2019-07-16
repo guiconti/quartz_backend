@@ -108,6 +108,7 @@ module.exports = {
     TOKEN_ENCRYPT_KEY: process.env.TOKEN_ENCRYPT_KEY,
     TOKEN_EXPIRATION_IN_SECONDS: 60 * 60 * 24 * 30,
     TOKEN_NAME: 'session',
+    GIPHY_API_KEY: process.env.GIPHY_API_KEY,
     MAX_ROOM_USERS: 4,
     MAX_ROUNDS: 5,
     crystals: {
@@ -322,6 +323,10 @@ module.exports = {
   },
   shuffleDictionary: [0, 1, 2, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',],
   assets: {
-    smallIcon: 'https://assets.bendev.com.br/icon-192x192.png'
+    smallIcon: 'https://assets.bendev.com.br/icon-192x192.png',
+  },
+  urls: {
+    GIPHY: 'http://api.giphy.com/v1/gifs/random?api_key=',
+    EXPLOSION_SUFFIX: '&tag=explosion'
   }
 };

@@ -5,8 +5,8 @@ const nextTurn = require('../../utils/nextTurn');
 const push = require('../../utils/push');
 const constants = require('../../utils/constants');
 
-module.exports = (game, playerIndex, cardIndex, info) => {
-  return new Promise((resolve, reject) => {
+module.exports = async (game, playerIndex, cardIndex, info) => {
+  return new Promise(async (resolve, reject) => {
     if (info == undefined) {
       return reject({
         status: 400,
@@ -82,9 +82,9 @@ module.exports = (game, playerIndex, cardIndex, info) => {
           crystalsGiven = `${info.given[i]} -${game.players[playerIndex].crystals[i].name}`;
         }
       }
-
+      
       if (didPlayerExploded(game, game.cache[0])) {
-        game = playerExploded(game, game.cache[0]);
+        game = await playerExploded(game, game.cache[0]);
       }
 
       game = nextTurn(game, playerIndex);

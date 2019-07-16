@@ -5,8 +5,8 @@ const discardCard = require('../../utils/discardCard');
 const nextTurn = require('../../utils/nextTurn');
 const constants = require('../../utils/constants');
 
-module.exports = (game, playerIndex, cardIndex, info) => {
-  return new Promise((resolve, reject) => {
+module.exports = async (game, playerIndex, cardIndex, info) => {
+  return new Promise(async (resolve, reject) => {
     if (info == undefined) {
       return reject({
         status: 400,
@@ -47,7 +47,7 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       }
 
       if (didPlayerExploded(game, playerIndex)) {
-        game = playerExploded(game, playerIndex);
+        game = await playerExploded(game, playerIndex);
       }
 
       game = nextTurn(game, game.cache[0]);
