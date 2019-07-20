@@ -1,6 +1,7 @@
 const io = require('../../utils/io');
 const nextTurn = require('../../utils/nextTurn');
 const discardCard = require('../../utils/discardCard');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 module.exports = (game, playerIndex, cardIndex, info) => {
@@ -74,6 +75,8 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       }
       
       io.emit(String(savedGame._id), constants.sockets.types.COME_CLOSER, message);
+      addPlayLog(game, `${game.players[playerIndex].user.username} used Come closer on ${game.players[targetedPlayerIndex].user.username}
+        giving a/an ${info.given} and taking a/an ${info.taken}`);
       io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
       return resolve();
     });

@@ -6,6 +6,7 @@
 const updateSummary = require('./updateSummary');
 const getGif = require('./getGif');
 const io = require('./io');
+const addPlayLog = require('./addPlayLog');
 const constants = require('./constants');
 
 module.exports = async (game, playerIndex) => {
@@ -17,6 +18,7 @@ module.exports = async (game, playerIndex) => {
     game.players[playerIndex].crystals[i].amount = 0;
   }
   updateSummary(game, playerIndex, constants.values.summary.EXPLODED);
+  addPlayLog(game, `${game.players[playerIndex].user.username} exploded`);
   let gifUrl = await getGif(constants.urls.GIPHY + constants.values.GIPHY_API_KEY + constants.urls.EXPLOSION_SUFFIX)
     .catch(err => {
       return false;

@@ -1,6 +1,7 @@
 const io = require('../../utils/io');
 const nextTurn = require('../../utils/nextTurn');
 const discardCard = require('../../utils/discardCard');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 module.exports = (game, playerIndex, cardIndex, info) => {
@@ -51,6 +52,8 @@ module.exports = (game, playerIndex, cardIndex, info) => {
         }
         
         io.emit(String(savedGame._id), constants.sockets.types.THESE_DONT_BELONG_TO_YOU, message);
+        addPlayLog(game, `${game.players[game.cache[0]].user.username} used These don't belong to you and took 
+          ${crystalsTook} from ${game.players[playerIndex].user.username}`);
         io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
         return resolve();
       });
@@ -105,6 +108,8 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       }
       
       io.emit(String(savedGame._id), constants.sockets.types.THESE_DONT_BELONG_TO_YOU, message);
+      addPlayLog(game, `${game.players[game.cache[0]].user.username} used These don't belong to you but countered by 
+        ${game.players[playerIndex].user.username} and lost ${crystalsTook}`);
       io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
       return resolve();
     });

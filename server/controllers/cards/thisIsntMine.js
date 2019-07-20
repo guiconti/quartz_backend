@@ -4,6 +4,7 @@ const playerExploded = require('../../utils/playerExploded');
 const nextTurn = require('../../utils/nextTurn');
 const discardCard = require('../../utils/discardCard');
 const push = require('../../utils/push');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 module.exports = async (game, playerIndex, cardIndex, info) => {
@@ -66,6 +67,8 @@ module.exports = async (game, playerIndex, cardIndex, info) => {
             return reject(err);
           }
           io.emit(String(savedGame._id), constants.sockets.types.THIS_ISNT_MINE, message);
+          addPlayLog(game, `${game.players[playerIndex].user.username} used This isn't mine and sent an Autunita to 
+            ${game.players[targetedPlayerIndex].user.username}`);
           io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
           return resolve();
         });

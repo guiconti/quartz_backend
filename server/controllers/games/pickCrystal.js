@@ -19,6 +19,7 @@ const playerExploded = require('../../utils/playerExploded');
 const isRoundOver = require('../../utils/isRoundOver');
 const startSelling = require('../../utils/startSelling');
 const updateSummary = require('../../utils/updateSummary');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 /**
@@ -76,6 +77,7 @@ module.exports = async (req, res) => {
     
     if (!sentExplosionMessage)
       io.emit(String(savedGame._id), constants.sockets.types.CRYSTAL_PICKED, crystalPicked);
+    addPlayLog(game, `${game.players[playerIndex].user.username} picked a/an ${crystalPicked.crystal}`);
     io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
     return res.status(200).json({
       msg: constants.messages.info.CRYSTAL_PICKED

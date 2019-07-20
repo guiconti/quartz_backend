@@ -16,6 +16,7 @@ const io = require('../../utils/io');
 const performSelling = require('../../utils/performSelling');
 const isSellingOver = require('../../utils/isSellingOver');
 const nextRound = require('../../utils/nextRound');
+const addPlayLog = require('../../utils/addPlayLog');
 const validator = require('../../utils/validator');
 const constants = require('../../utils/constants');
 
@@ -70,6 +71,7 @@ module.exports = (req, res) => {
       message: `You received ${moneyWon} coins for this day of work.`
     };
     io.emit(String(game.players[playerIndex]._id), constants.sockets.types.INFORMATIVE, message);
+    addPlayLog(game, `${game.players[playerIndex].user.username} received ${moneyWon} coins for this day of work`);
     if (!game.active) {
       //  Save summary
       game.players.forEach(player => {

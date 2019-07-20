@@ -1,11 +1,13 @@
 const io = require('../../utils/io');
 const discardCard = require('../../utils/discardCard');
 const nextTurn = require('../../utils/nextTurn');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 module.exports = (game, playerIndex, cardIndex) => {
   return new Promise((resolve, reject) => {
     let crystalsLost = [];
+    let messageCrystalsLost = '';
     for (let i = 0; i < game.players.length; i++) {
       if (i !== playerIndex) {
         let crystalPicker = '';
@@ -25,6 +27,7 @@ module.exports = (game, playerIndex, cardIndex) => {
           game.players[i].crystals[pickedCrystalIndex].amount--;
           game.cave.crystals[pickedCrystalIndex].amount++;
           crystalLost.crystal = game.players[i].crystals[pickedCrystalIndex].name;
+          messageCrystalsLost += ` ${game.players[i].user.username} lose a/an ${game.players[i].crystals[pickedCrystalIndex].name}`;
         }
         crystalsLost.push(crystalLost);
       }
@@ -45,6 +48,7 @@ module.exports = (game, playerIndex, cardIndex) => {
       }
       
       io.emit(String(savedGame._id), constants.sockets.types.OUT_OF_MY_WAY, message);
+      addPlayLog(game, `${game.players[playerIndex].user.username} used Out of my way making${messageCrystalsLost}`);
       io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
       return resolve();
     });

@@ -3,6 +3,7 @@ const didPlayerExploded = require('../../utils/didPlayerExploded');
 const playerExploded = require('../../utils/playerExploded');
 const nextTurn = require('../../utils/nextTurn');
 const push = require('../../utils/push');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 module.exports = async (game, playerIndex, cardIndex, info) => {
@@ -69,7 +70,7 @@ module.exports = async (game, playerIndex, cardIndex, info) => {
           alreadyTookCrystal = true;
           game.players[playerIndex].crystals[i].amount += info.taken[i];
           game.cave.crystals[i].amount -= info.taken[i];
-          crystalsTook = `${info.taken[i]} -${game.players[playerIndex].crystals[i].name}`;
+          crystalsTook = `${info.taken[i]} - ${game.players[playerIndex].crystals[i].name}`;
         }
 
         if (!alreadyGaveCrystal && info.given[i] > 0) {
@@ -79,7 +80,7 @@ module.exports = async (game, playerIndex, cardIndex, info) => {
           }
           game.players[game.cache[0]].crystals[i].amount += info.given[i];
           game.cave.crystals[i].amount -= info.given[i];
-          crystalsGiven = `${info.given[i]} -${game.players[playerIndex].crystals[i].name}`;
+          crystalsGiven = `${info.given[i]} - ${game.players[playerIndex].crystals[i].name}`;
         }
       }
       
@@ -106,6 +107,8 @@ module.exports = async (game, playerIndex, cardIndex, info) => {
         }
         
         io.emit(String(savedGame._id), constants.sockets.types.GIVE_ME_A_HAND_HERE, message);
+        addPlayLog(game, `${game.players[playerIndex].user.username} used Give me a hand here to make 
+          ${game.players[game.cache[0]].user.username} mine. ${game.players[playerIndex].user.username} got ${crystalsTook} and ${game.players[game.cache[0]].user.username} got ${crystalsGiven}`);
         io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
         return resolve();
       });

@@ -1,6 +1,7 @@
 const io = require('../../utils/io');
 const discardCard = require('../../utils/discardCard');
 const nextTurn = require('../../utils/nextTurn');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 module.exports = (game, playerIndex, cardIndex) => {
@@ -33,6 +34,7 @@ module.exports = (game, playerIndex, cardIndex) => {
       }
       
       io.emit(String(savedGame._id), constants.sockets.types.HERE_WE_GO, message);
+      addPlayLog(game, `${game.players[playerIndex].user.username} used Here we go and got ${crystalsPicked.join(' ')}`);
       io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
       return resolve();
     });

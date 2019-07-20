@@ -17,6 +17,7 @@ const nextTurn = require('../../utils/nextTurn');
 const isRoundOver = require('../../utils/isRoundOver');
 const startSelling =  require('../../utils/startSelling');
 const updateSummary = require('../../utils/updateSummary');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 /**
@@ -75,6 +76,7 @@ module.exports = (req, res) => {
       };
       io.emit(String(game.players[playerIndex]._id), constants.sockets.types.INFORMATIVE, message);
     }
+    addPlayLog(game, `${game.players[playerIndex].user.username} closed his/her mine`);
     io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
     return res.status(200).json({
       msg: constants.messages.info.MINE_CLOSED

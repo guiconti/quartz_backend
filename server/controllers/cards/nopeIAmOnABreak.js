@@ -3,6 +3,7 @@ const didPlayerExploded = require('../../utils/didPlayerExploded');
 const playerExploded = require('../../utils/playerExploded');
 const discardCard = require('../../utils/discardCard');
 const nextTurn = require('../../utils/nextTurn');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 module.exports = async (game, playerIndex, cardIndex, info) => {
@@ -36,13 +37,13 @@ module.exports = async (game, playerIndex, cardIndex, info) => {
         if (!alreadyTookCrystal && game.cache[game.cache.length - 2][i] > 0 && i < game.players[game.cache[0]].crystals.length - 1) {
           alreadyTookCrystal = true;
           game.players[game.cache[0]].crystals[i].amount += game.cache[game.cache.length - 2][i];
-          crystalsTook = `${game.cache[game.cache.length - 2][i]} -${game.players[playerIndex].crystals[i].name}`;
+          crystalsTook = `${game.cache[game.cache.length - 2][i]} - ${game.players[playerIndex].crystals[i].name}`;
         }
 
         if (!alreadyGaveCrystal && game.cache[game.cache.length - 1][i] > 0) {
           alreadyGaveCrystal = true;
           game.players[playerIndex].crystals[i].amount += game.cache[game.cache.length - 1][i];
-          crystalsGiven = `${game.cache[game.cache.length - 1][i]} -${game.players[playerIndex].crystals[i].name}`;
+          crystalsGiven = `${game.cache[game.cache.length - 1][i]} - ${game.players[playerIndex].crystals[i].name}`;
         }
       }
 
@@ -69,6 +70,8 @@ module.exports = async (game, playerIndex, cardIndex, info) => {
         }
         
         io.emit(String(savedGame._id), constants.sockets.types.GIVE_ME_A_HAND_HERE, message);
+        addPlayLog(game, `${game.players[game.cache[0]].user.username} used Give me a hand here to make 
+          ${game.players[playerIndex].user.username} mine. ${game.players[game.cache[0]].user.username} got ${crystalsTook} and ${game.players[playerIndex].user.username} got ${crystalsGiven}`);
         io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
         return resolve();
       });
@@ -94,6 +97,8 @@ module.exports = async (game, playerIndex, cardIndex, info) => {
       }
       
       io.emit(String(savedGame._id), constants.sockets.types.GIVE_ME_A_HAND_HERE, message);
+      addPlayLog(game, `${game.players[game.cache[0]].user.username} used Give me a hand here but 
+        ${game.players[playerIndex].user.username} was on a break`);
       io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
       return resolve();
     });

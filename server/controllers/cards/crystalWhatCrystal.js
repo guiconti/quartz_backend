@@ -1,6 +1,7 @@
 const io = require('../../utils/io');
 const discardCard = require('../../utils/discardCard');
 const nextTurn = require('../../utils/nextTurn');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 module.exports = (game, playerIndex, cardIndex, info) => {
@@ -38,6 +39,8 @@ module.exports = (game, playerIndex, cardIndex, info) => {
       }
       
       io.emit(String(savedGame._id), constants.sockets.types.CRYSTAL_WHAT_CRYSTAL, message);
+      addPlayLog(game, `${game.players[playerIndex].user.username} used Crystal what crystal and kept his/her ${message.crystal} 
+        safe for the rest of the day`);
       io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
       return resolve();
     });

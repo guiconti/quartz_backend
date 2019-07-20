@@ -14,6 +14,7 @@
  */
 const io = require('../../utils/io');
 const nextTurn = require('../../utils/nextTurn');
+const addPlayLog = require('../../utils/addPlayLog');
 const constants = require('../../utils/constants');
 
 /**
@@ -92,6 +93,7 @@ module.exports = (req, res) => {
       taken: taken
     };
     io.emit(String(savedGame._id), constants.sockets.types.EUREKA_ANSWER, message);
+    addPlayLog(game, `${game.players[playerIndex].user.username} used Eureka giving a/an ${given} and taking a/an ${taken}`);
     io.emit(String(savedGame._id), constants.sockets.types.UPDATE_GAME, savedGame);
     return res.status(200).json({
       msg: constants.messages.info.CRYSTAL_PICKED
