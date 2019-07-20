@@ -109,7 +109,7 @@ module.exports = {
     TOKEN_EXPIRATION_IN_SECONDS: 60 * 60 * 24 * 30,
     TOKEN_NAME: 'session',
     GIPHY_API_KEY: process.env.GIPHY_API_KEY,
-    MAX_ROOM_USERS: 4,
+    MAX_ROOM_USERS: 5,
     MAX_ROUNDS: 5,
     crystals: {
       QUARTZO: {
