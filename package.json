@@ -27,7 +27,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.14.0",
     "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.4.4",
+    "mongoose": "^5.7.5",
     "request": "^2.88.0",
     "rollbar": "^2.2.7",
     "socket.io": "^2.2.0",
