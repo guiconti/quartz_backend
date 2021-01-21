@@ -30,7 +30,7 @@
     "mongoose": "^5.4.4",
     "request": "^2.88.0",
     "rollbar": "^2.2.7",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "underscore": "^1.8.3",
     "web-push": "^3.3.5"
   },
